@@ -23,3 +23,5 @@ node_modules
 requirements/build
 sqlite.db
 *.sh
+
+db.sqlite3
