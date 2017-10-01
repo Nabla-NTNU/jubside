@@ -1,0 +1,7 @@
+{% block content %}
+    <h1>Registrer bruker</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
