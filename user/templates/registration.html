@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Registrer deg</div>
+            <div class="panel-body">
+                <h4>Informasjon:</h4>
+                <p>
+                    Har du ikke eksisterende bruker på nabla.no blir du bedt om å sende inn en registreringsforespørsel.
+                    Dette gjør vi for å bekrefte din tilknytning til linjeforeningen Nabla.
+                    Du mottar svar på e-post når vi har godtatt eller avslått forespørselen.
+                </p>
+                <br>
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    <label>Fornavn</label>
+                    {{ form.first_name }}
+                    <br>
+                    <label>Etternavn</label>
+                    {{ form.last_name }}
+                    <br>
+                    <label>E-post</label>
+                    {{ form.email }}
+                    <br>
+                    <label>Passord</label>
+                    {{ form.password }}
+                    <br>
+                    <label>Årskull</label>
+                    {{ form.starting_year }}
+                    <br><br>
+                    <button type="submit" class="save btn btn-primary btn-block" >Send forespørsel</button>
+                </form>
+            </div>
+        </div>
+        <ol class="breadcrumb">
+            <li><a href="{% url 'user.login' %}">Logg inn</a></li>
+            <li class="active">Registrer deg</li>
+        </ol>
+    </div>
+</div>
+{% endblock %}

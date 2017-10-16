@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Innlogging</div>
+            <div class="panel-body">
+                <form class="login" method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input type="submit" class="btn btn-primary btn-block" value="Logg inn"/>
+                </form>
+                <a class="btn btn-success btn-block" href="{% url 'user.registration' %}">Registrer deg</a>
+                <br>
+                <a class="pull-right" href="{% url 'user.recover' %}">Glemt passord?</a>
+            </div>
+        </div>
+        <ol class="breadcrumb">
+            <li class="active">Logg inn</li>
+        </ol>
+    </div>
+</div>
+{% endblock %}

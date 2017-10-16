@@ -19,6 +19,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='frontpage'),
-    url(r'^user/', include('user.urls')),
+    url(r'^', include('user.urls')),
     url(r'^admin/', admin.site.urls),
 ]
