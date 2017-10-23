@@ -29,3 +29,14 @@ class User (AbstractUser):
         verbose_name="Avventer godkjenning",
         default=True
     )
+
+    account_verified = models.BooleanField(
+        verbose_name="Verifisert konto (e-post)",
+        default=False
+    )
+
+    class Meta:
+        permissions = (
+            ("can_view_users", "Can view users awaiting checkup for registration"),
+            ("can_change_users", "Can change user status during checkup for registration"),
+        )

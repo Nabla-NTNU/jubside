@@ -11,7 +11,7 @@ class UserFieldAdmin(UserAdmin):
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-        ('Brukerstatus', {'fields': ('is_awaiting_approval',)}),
+        ('Brukerstatus', {'fields': ('is_awaiting_approval','account_verified')}),
     )
 
 

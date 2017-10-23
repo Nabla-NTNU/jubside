@@ -7,27 +7,38 @@
             <div class="panel-body">
                 <h4>Informasjon:</h4>
                 <p>
-                    Har du ikke eksisterende bruker på nabla.no blir du bedt om å sende inn en registreringsforespørsel.
+                    Om du ikke har eksisterende bruker på nabla.no blir du bedt om å sende inn en registreringsforespørsel.
                     Dette gjør vi for å bekrefte din tilknytning til linjeforeningen Nabla.
-                    Du mottar svar på e-post når vi har godtatt eller avslått forespørselen.
+                    Du mottar en verifiserings e-post når og om forespørselen din har blitt godkjent.
                 </p>
                 <br>
-                <form method="POST" class="post-form">
+                <form method="POST" class="post-form" action="{% url 'user.registration' %}">
                     {% csrf_token %}
                     <label>Fornavn</label>
-                    {{ form.first_name }}
+                    <div class="input-group">
+                        {{ form.first_name }}
+                        <span class="input-group-addon" id="basic-addon2">@example.com</span>
+                    </div>
                     <br>
                     <label>Etternavn</label>
-                    {{ form.last_name }}
+                    <div class="input-group">
+                        {{ form.last_name }}
+                    </div>
                     <br>
                     <label>E-post</label>
-                    {{ form.email }}
+                    <div class="input-group">
+                        {{ form.email }}
+                    </div>
                     <br>
                     <label>Passord</label>
-                    {{ form.password }}
+                    <div class="input-group">
+                        {{ form.password }}
+                    </div>
                     <br>
-                    <label>Årskull</label>
-                    {{ form.starting_year }}
+                    <label>Årskull (4 siffer)</label>
+                    <div class="input-group">
+                        {{ form.starting_year }}
+                    </div>
                     <br><br>
                     <button type="submit" class="save btn btn-primary btn-block" >Send forespørsel</button>
                 </form>
