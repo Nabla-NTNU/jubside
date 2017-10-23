@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$', views.index, name='frontpage'),
     url(r'^', include('user.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^calendar/', include('happenings.urls', namespace='calendar')),
 ]
