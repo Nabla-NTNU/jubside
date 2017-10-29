@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'user',
     'jubside',
     'happenings',
+    'album'
 ]
 
 AUTH_USER_MODEL = 'user.User'
