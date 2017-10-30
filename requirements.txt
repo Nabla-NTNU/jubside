@@ -1,2 +1,3 @@
 django==1.11.5
 git+git://github.com/NablaWebkom/django-happenings.git
+git+https://bitbucket.org/webkom/content-app.git@1e451bfd956fcdbfa8df2d5bb834137e2819752a#egg=content
