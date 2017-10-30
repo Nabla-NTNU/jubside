@@ -12,6 +12,7 @@ class UserFieldAdmin(UserAdmin):
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
         ('Brukerstatus', {'fields': ('is_awaiting_approval','account_verified')}),
+        ('Årskull', {'fields': ('starting_year',)}),
     )
 
 

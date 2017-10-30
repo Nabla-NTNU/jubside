@@ -1,4 +1,14 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+{% url 'jubside.frontpage' as jubside_frontpage %}
+{% url 'user.profile' as user_profile %}
+{% url 'user.settings' as user_settings %}
+{% url 'user.change_password' as user_change_password %}
+{% url 'user.events' as user_events %}
+{% url 'user.registration' as user_registration %}
+{% url 'user.reset' as user_reset %}
+{% url 'user.registerapplicants' as user_registerapplicants %}
+{% url 'user.logout' as user_logout %}
+{% url 'user.login' as user_login %}
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -7,25 +17,35 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">75 års logo</a>
+      <a class="navbar-brand" href="{{ jubside_frontpage }}"><b>Nabla 75</b></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
+      <!-- left navbar -->
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
+        <li {% if request.path == jubside_frontpage %}class="active"{% endif %}><a href="{{ jubside_frontpage }}">Hjem</a></li>
+        <li><a href="#about">Nyheter</a></li>
+        <li><a href="#contact">Arrangementer</a></li>
+        <li><a href="#contact">Album</a></li>
+      </ul>
+      <!-- right navbar -->
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+          <li class="dropdown{% if request.path == user_registerapplicants or request.path == user_profile or request.path == user_settings or request.path == user_change_password or request.path == user_events %} active{% else %}{% endif %}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.first_name }} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ user_profile }}">Min profil</a></li>
+              <li><a href="{{ user_settings }}">Innstillinger</a></li>
+              <li><a href="{{ user_events }}">Påmeldte arrangementer</a></li>
+              {% if perms.user.can_view_users %}
+                <li><a href="{{ user_registerapplicants }}">Brukere</a></li>
+              {% endif %}
+              <li role="separator" class="divider"></li>
+              <li><a href="{{ user_logout }}">Logg ut</a></li>
+            </ul>
+          </li>
+        {% else %}
+        <li {% if request.path == user_login or request.path == user_registration or request.path == user_reset %}class="active"{% endif %}><a href="{{ user_login }}">Logg inn / Registrer deg</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>
