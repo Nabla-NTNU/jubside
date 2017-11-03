@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from easy_thumbnails.conf import Settings as EasyThumbnailSettings
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+SITE_ID = 1
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "jubside.nabla.no"]
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,25 +29,39 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ff34xtnmhg8uc3er$=q@y1lk2w^*m^ta7(1qf0diz#hbw62ays'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+LOGIN_REDIRECT_URL = '/user/min-profil/'
 
-LOGIN_REDIRECT_URL = '/min-profil/'
+# Gjør det enkelt å bruke relative paths
+PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
+VARIABLE_CONTENT = os.environ.get("VARIABLE_CONTENT", os.path.join(PROJECT_ROOT, 'var'))
 
 # Application definition
-
 INSTALLED_APPS = [
+    # Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.flatpages',
+    'django.contrib.humanize',
     'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
-    'user',
+
+    # Self-made
+    'content',
+    'events',
+    'image',
     'jubside',
-    'happenings',
+    'user',
+
+    # Django-packages
+    'bootstrap3',
+    'easy_thumbnails',
+    'image_cropping',
+    'markdown',
+    'sekizai',
 ]
 
 AUTH_USER_MODEL = 'user.User'
@@ -57,8 +78,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'jubside.urls'
 
-PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -69,6 +88,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sekizai.context_processors.sekizai',
             ],
         },
     },
@@ -87,9 +107,25 @@ DATABASES = {
     }
 }
 
-# EMAIL
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+}
+
+# All epost blir sendt til terminalen, istedet for ut til brukerne.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# easy_thumbnail debugging
+# Gjør at man får en feilmelding dersom thumbnail-taggen ikke klarer å lage ny
+# thumbnail
+THUMBNAIL_DEBUG = True
+
+# easy-thumbnails/Django-image-cropping
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + EasyThumbnailSettings.THUMBNAIL_PROCESSORS
+THUMBNAIL_BASEDIR = 'thumbnails'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -117,14 +153,19 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Oslo'
 
+DATE_FORMAT = 'j. F Y'
+
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
+# Absolute path to the directory that holds media.
+MEDIA_ROOT = os.path.join(VARIABLE_CONTENT, 'media')
+MEDIA_URL = '/media/'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
+STATIC_ROOT = os.path.join(VARIABLE_CONTENT, 'static_collected')
 
 STATIC_URL = '/static/'
+
