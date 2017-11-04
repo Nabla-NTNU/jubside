@@ -1,2 +1,7 @@
 django==1.11.5
-git+git://github.com/NablaWebkom/django-happenings.git
+django-markdown-app==0.9.3
+easy-thumbnails==2.5
+django-bootstrap3==9.1.0
+django-image-cropping==1.1.0
+django-sekizai==0.10.0
+django-braces==1.11.0
