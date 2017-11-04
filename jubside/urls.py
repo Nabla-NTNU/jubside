@@ -33,7 +33,6 @@ urlpatterns = [
     # Del filer (Husk manage.py collectstatic for static filer når DEBUG=False)
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 
-
 ]
 
 if settings.DEBUG:

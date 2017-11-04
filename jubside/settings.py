@@ -36,6 +36,14 @@ LOGIN_REDIRECT_URL = '/user/min-profil/'
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 VARIABLE_CONTENT = os.environ.get("VARIABLE_CONTENT", os.path.join(PROJECT_ROOT, 'var'))
 
+# Absolute path to the directory that holds media.
+MEDIA_ROOT = os.path.join(VARIABLE_CONTENT, 'media')
+MEDIA_URL = '/media/'
+
+STATIC_URL = '/static/'
+
+
+
 # Application definition
 INSTALLED_APPS = [
     # Django
@@ -51,9 +59,9 @@ INSTALLED_APPS = [
 
     # Self-made
     'content',
+    'contentapps.album',
     'events',
     'feature-albums',
-    'image',
     'jubside',
     'user',
 
@@ -63,11 +71,6 @@ INSTALLED_APPS = [
     'image_cropping',
     'markdown',
     'sekizai',
-    'django.contrib.sites',
-    'user',
-    'jubside',
-    'content',
-    'contentapps.album',
     'easy_thumbnails',
 ]
 
@@ -172,12 +175,4 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
-
-# Absolute path to the directory that holds media.
-MEDIA_ROOT = os.path.join(VARIABLE_CONTENT, 'media')
-MEDIA_URL = '/media/'
-
-STATIC_ROOT = os.path.join(VARIABLE_CONTENT, 'static_collected')
-
-STATIC_URL = '/static/'
 
