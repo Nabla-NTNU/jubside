@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load markdown %}
+{% load django_markdown %}
 {% load easy_thumbnails %}
 
 {% block title %}{{ event.headline }}{% endblock %}
@@ -41,9 +41,7 @@
         {% endfor %}
     </div>
 {% endif %}
-
-{% include "content/includes/comments.html" with content=event %}
-
+    
 {% endblock %}
 
 

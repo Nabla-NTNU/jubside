@@ -61,7 +61,6 @@ INSTALLED_APPS = [
     'content',
     'contentapps.album',
     'events',
-    'feature-albums',
     'jubside',
     'user',
 
@@ -69,9 +68,9 @@ INSTALLED_APPS = [
     'bootstrap3',
     'easy_thumbnails',
     'image_cropping',
+    'django_markdown',
     'markdown',
     'sekizai',
-    'easy_thumbnails',
 ]
 
 AUTH_USER_MODEL = 'user.User'
