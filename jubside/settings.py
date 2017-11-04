@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # Self-made
     'content',
     'events',
+    'feature-albums',
     'image',
     'jubside',
     'user',
@@ -62,9 +63,17 @@ INSTALLED_APPS = [
     'image_cropping',
     'markdown',
     'sekizai',
+    'django.contrib.sites',
+    'user',
+    'jubside',
+    'content',
+    'contentapps.album',
+    'easy_thumbnails',
 ]
 
 AUTH_USER_MODEL = 'user.User'
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -144,6 +153,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
 
 
 # Internationalization

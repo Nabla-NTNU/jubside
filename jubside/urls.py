@@ -1,3 +1,4 @@
+
 """jubside URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -16,17 +17,22 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
-from . import views
+from django.views.static import serve
 from django.views.generic import RedirectView, TemplateView
+from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='jubside.frontpage'),
-    url(r'^user/', include('user.urls')),
+    url(r'^$', views.index, name='frontpage'),
+    url(r'^', include('user.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^album/', include('contentapps.album.urls')),
     url(r'^arrangement/', include('events.urls')),
     url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico', permanent=True)),
     url(r'^markdown/', include('django_markdown.urls')),
-    #url(r'^calendar/', include('happenings.urls', namespace='calendar')),
+
+    # Del filer (Husk manage.py collectstatic for static filer når DEBUG=False)
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+
 
 ]
 

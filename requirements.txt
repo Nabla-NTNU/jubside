@@ -5,3 +5,5 @@ django-bootstrap3==9.1.0
 django-image-cropping==1.1.0
 django-sekizai==0.10.0
 django-braces==1.11.0
+git+https://bitbucket.org/webkom/content-app.git@1e451bfd956fcdbfa8df2d5bb834137e2819752a#egg=content
+feature-albums
