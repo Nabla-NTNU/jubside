@@ -17,6 +17,7 @@
             <th>Epost</th>
             <th>Klasse</th>
             <th>Påmeldingstidspunkt</th>
+            <th>Allergier</th>
         </tr>
         {% for registration in eventregistrations.all %}
         {% with user=registration.user %}
@@ -44,6 +45,9 @@
             </td>
             <td>
                 {{registration.date|date:"d.m.y" }}
+            </td>
+            <td>
+                {{ user.allergies }}
             </td>
 	    </tr>
         {% endwith %}
