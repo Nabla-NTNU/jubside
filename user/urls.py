@@ -7,7 +7,7 @@ from . import views
 urlpatterns = [
     # innlogging og registrering
     url(r'^logg-inn/$', auth_views.login, {'template_name': 'user_login.html', 'redirect_authenticated_user': True}, name='user.login'),
-    url(r'^logg-ut/$', auth_views.logout, {'next_page': 'jubside.frontpage'}, name='user.logout'),
+    url(r'^logg-ut/$', auth_views.logout, {'next_page': '/'}, name='user.logout'),
     url(r'^registrer-meg/$', views.registration, name='user.registration'),
     # glemt passord relatert
     url(r'^glemt-passord/$', auth_views.PasswordResetView.as_view(template_name='password_reset/user_password_reset.html', email_template_name='password_reset/user_password_reset_email.html', subject_template_name='password_reset/user_password_reset_subject.txt', success_url=reverse_lazy('user.reset_done'), from_email='ikke-svar@nabla.no'),
