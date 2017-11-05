@@ -1,0 +1,270 @@
+/*----------------------------------------------------------------------------*\
+	Reset defaults
+\*----------------------------------------------------------------------------*/
+
+html { background-color: #fafafa; font-family: sans-serif; }
+body {
+	/*background-image: url(HEDDA.png);
+	background-size: cover;*/
+	background-color: #ccc;
+	margin: 0;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+address { font-style: normal; }
+a, a:visited { text-decoration: none; }
+
+/*----------------------------------------------------------------------------*\
+	Theme colors
+\*----------------------------------------------------------------------------*/
+
+.col1 { color: #f8b195; }
+.col2 { color: #f67280; }
+.col3 { color: #c06c84; }
+.col4 { color: #6c5b7b; }
+.col5 { color: #355c7d; }
+
+/*----------------------------------------------------------------------------*\
+	Navigation bar (w/ mobile support)
+\*----------------------------------------------------------------------------*/
+
+nav#jub-nav {
+	height: 4rem;
+	display: flex;
+	font-size: 1.3em;
+}
+
+nav > div {
+	background-color: #bbb;
+	border-bottom: 1px solid #ccc; /*?*/
+}
+
+nav div img {
+	width: 40px;
+	height: 40px;
+	padding: 3px;
+}
+
+#user-block { font-weight: bold; }
+
+#site-navigation {
+	flex: 1;
+	display: flex;
+	align-items: center;
+}
+
+#site-navigation #main-menu,
+#site-navigation > input {
+	font-weight: bold;
+	display: none;
+}
+
+#site-navigation > label {
+	display: block;
+	font-size: 36px;
+	position: absolute;
+	right: 20px;
+	width: 36px;
+	padding: 0;
+	cursor: pointer;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#site-navigation a:hover, #site-navigation #user-block:hover {
+	color: #333;
+	/*text-decoration: underline dashed gold;*/
+}
+#site-navigation #user-block:hover { cursor: pointer; }
+
+@media only screen and (max-width: 767px) { /* min-width rules won't override this otherwise */
+	#site-navigation > input:checked + #main-menu {
+		position: absolute;
+		top: 43px; /*40 + 3*/
+		right: 0;
+		display: block;
+		clear: both;
+		width: 100%;
+		background-color: #bbb;
+		text-align: right;
+		z-index: 1; /* above header image */
+	}
+
+	#site-navigation #user-block {
+		margin-left: 50px;
+	}
+}
+
+
+#site-navigation ul li {
+	display: block;
+	padding: 12px 10px;
+}
+
+@media only screen and (min-width: 768px) {
+	#site-navigation {
+		height: auto;
+	}
+	#site-navigation > #main-menu {
+		display: block;
+	}
+	#site-navigation > label {
+		display: none
+	}
+	#site-navigation ul li {
+		display: inline-block;
+	}
+	#site-navigation #user-block {
+		position: absolute;
+		right: 50px;
+	}
+}
+
+/*----------------------------------------------------------------------------*\
+	News bar
+\*----------------------------------------------------------------------------*/
+
+#jub-newsflash {
+	position: relative;
+	width: 100%;
+	padding: 0.5em 0 0.5em 0;
+	overflow: hidden;
+}
+
+#jub-newsflash ul li:hover {
+	cursor: pointer;
+}
+
+#jub-newsflash ul {
+	margin: 0;
+	list-style-type: none;
+	white-space: nowrap;
+}
+
+#jub-newsflash ul li {
+	display: inline;
+	margin-right: 3em;
+}
+
+#jub-newsmore:hover { cursor: pointer; }
+
+#jub-newsmore:before {
+	position: absolute;
+	left: -4em; /*double of padding*/
+	top: 0;
+	height: 100%;
+	padding: 2em;
+	content: "";
+	background-color: transparent;
+  background: linear-gradient(90deg, rgba(0,0,0,0), #ccc);
+}
+
+#jub-newsmore {
+	position: absolute;
+	right: 0;
+	top: 0;
+
+	padding: 0.5em;
+	padding-right: 3em;
+
+	background-color: #ccc;
+}
+
+/*----------------------------------------------------------------------------*\
+	Main content (calendar)
+\*----------------------------------------------------------------------------*/
+
+main {
+	margin: auto;
+	padding-bottom: 2em;
+	width: 1000px;
+}
+
+.jub-content {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 0.2em;
+	height: 500px;
+}
+
+@media (max-width: 1011px) {
+	main { width: 100%; }
+	.jub-content { grid-template-columns: repeat(2, 1fr); height: 50em;}
+}
+
+.jub-content article {
+	position: relative;
+	background-color: #333;
+}
+
+.jub-content article .article-title {
+	position: absolute;
+	margin: 0;
+	top: 0;
+	padding: 0.5em;
+	font-size: 1.5em;
+}
+
+.article-title h4 { text-transform: uppercase; margin: 0; }
+
+.jub-content article p {
+	display: none;
+	flex: 1;
+	margin: 1em;
+	overflow: hidden;
+}
+
+.jub-content article:after {
+	display: none;
+	position: absolute;
+	bottom: 1em;
+	width: 100%;
+	height: 4em;
+	content: "";
+  background: linear-gradient(rgba(0,0,0,0), #eee);
+}
+
+.jub-content article img, .jub-content article iframe {
+	/*border-radius: 5px 5px 0 0;*/
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.jub-content article img {
+	height: 0;
+	object-fit: cover;
+}
+
+/*@media only screen and (max-width: 768px) {
+	.jub-content article {
+		width: 100%;
+		border: none;
+		border-radius: 0;
+		margin-bottom: 1em;
+	}
+	.jub-content article img, .jub-content article iframe
+	{
+		border-radius: 0;
+	}
+}*/
+
+/*----------------------------------------------------------------------------*\
+	Footer w/ links
+\*----------------------------------------------------------------------------*/
+
+footer {
+	min-height: 5em;
+	display: flex;
+	flex-direction: row;
+	background-color: #bbb;
+}
+address, #socmed-links, #feedback { padding: 1em; flex: 1; }
+h2, #socmed-links ul { margin: 0; padding: 0; } li { padding 0; display: inline; }
+#socmed-links li:after { content: ", "; }
+#socmed-links li:last-child:after { content: ""; }
