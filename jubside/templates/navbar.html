@@ -31,7 +31,11 @@
       <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
           <li class="dropdown{% if request.path == user_registerapplicants or request.path == user_profile or request.path == user_settings or request.path == user_change_password or request.path == user_events %} active{% else %}{% endif %}">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.first_name }} <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-user"></span>
+                    {{ user.first_name }} {{ user.last_name }}
+                  <span class="caret"></span>
+              </a>
             <ul class="dropdown-menu">
               <li><a href="{{ user_profile }}">Min profil</a></li>
               <li><a href="{{ user_settings }}">Innstillinger</a></li>
