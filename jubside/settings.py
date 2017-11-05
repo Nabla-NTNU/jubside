@@ -30,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ff34xtnmhg8uc3er$=q@y1lk2w^*m^ta7(1qf0diz#hbw62ays'
 
 
-LOGIN_REDIRECT_URL = '/user/min-profil/'
+LOGIN_REDIRECT_URL = '/min-profil/'
 
 # Gjør det enkelt å bruke relative paths
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
