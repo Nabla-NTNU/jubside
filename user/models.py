@@ -23,6 +23,7 @@ class User (AbstractUser):
     allergies = models.CharField(
         max_length=100,
         verbose_name="Allergier",
+        default=""
     )
 
     starting_year = models.CharField(
