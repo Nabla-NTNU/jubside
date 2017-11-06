@@ -47,6 +47,7 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(VARIABLE_CONTENT, 'static-collected')
 
 
 # Application definition
