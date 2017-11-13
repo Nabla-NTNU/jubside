@@ -40,7 +40,9 @@
                 {{ user.email }}
             </td>
             <td>
-                {{ user.get_class_number }}
+                {% if user.starting_year %}
+                    {{ user.starting_year }}
+                {% endif %}
             </td>
             <td>
                 {{registration.date|date:"d.m.y" }}

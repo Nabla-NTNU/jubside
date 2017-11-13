@@ -44,7 +44,7 @@
                     <tr class="success">
                         <td>{{ reg.number }}</td>
                         <td>{{ reg.user.get_full_name }}</td>
-                        <td>{{ reg.user.get_class_number }}</td>
+                        <td>{{ reg.user.starting_year }}</td>
                         <td><input type="checkbox" name="user" value="{{ reg.user.username }}" /></td>
                     </tr>
                 {% endfor %}
@@ -55,7 +55,7 @@
                     <tr class="warning">
                         <td>{{ reg.number }}</td>
                         <td>{{ reg.user.get_full_name }}</td>
-                        <td>{{ reg.user.get_class_number }}</td>
+                        <td>{{ reg.user.starting_year }}</td>
                         <td><input type="checkbox" name="user" value="{{ reg.user.username }}" /></td>
                     </tr>
                 {% endfor %}
