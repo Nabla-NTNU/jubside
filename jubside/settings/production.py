@@ -174,12 +174,11 @@ if DEBUG:
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Oslo'
-
+LANGUAGE_CODE = 'nb'
+USE_L10N = False
 DATE_FORMAT = 'j. F Y'
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = False
 
