@@ -6,7 +6,7 @@ html { background-color: #fafafa; font-family: sans-serif; }
 body {
 	/*background-image: url(HEDDA.png);
 	background-size: cover;*/
-	background-color: #ccc;
+	background-color: var(--bg-color);
 	margin: 0;
 	min-height: 100vh;
 	display: flex;
@@ -15,9 +15,14 @@ body {
 address { font-style: normal; }
 a, a:visited { text-decoration: none; }
 
+/* OVERRIDE BOOTSTRAP */
+body { padding-top: 0; }
+
 /*----------------------------------------------------------------------------*\
 	Theme colors
 \*----------------------------------------------------------------------------*/
+
+:root { --bg-color: #eee; --bar-color: #e8e8e8; }
 
 .col1 { color: #f8b195; }
 .col2 { color: #f67280; }
@@ -30,23 +35,27 @@ a, a:visited { text-decoration: none; }
 \*----------------------------------------------------------------------------*/
 
 nav#jub-nav {
-	height: 4rem;
+	position:relative;
+	height: 6rem!important;
 	display: flex;
 	font-size: 1.3em;
 }
 
 nav > div {
-	background-color: #bbb;
-	border-bottom: 1px solid #ccc; /*?*/
+	background-color: var(--bar-color);
+	border-bottom: 1px solid var(--bg-color); /*?*/
 }
 
 nav div img {
-	width: 40px;
-	height: 40px;
+	object-fit: cover;
+	max-height: 6rem;
 	padding: 3px;
 }
 
-#user-block { font-weight: bold; }
+#user-block {
+	font-weight: bold;
+	margin: auto;
+}
 
 #site-navigation {
 	flex: 1;
@@ -58,6 +67,7 @@ nav div img {
 #site-navigation > input {
 	font-weight: bold;
 	display: none;
+	margin: auto 0;
 }
 
 #site-navigation > label {
@@ -91,7 +101,7 @@ nav div img {
 		display: block;
 		clear: both;
 		width: 100%;
-		background-color: #bbb;
+		background-color: var(--bar-color);
 		text-align: right;
 		z-index: 1; /* above header image */
 	}
@@ -162,7 +172,7 @@ nav div img {
 	padding: 2em;
 	content: "";
 	background-color: transparent;
-  background: linear-gradient(90deg, rgba(0,0,0,0), #ccc);
+  background: linear-gradient(90deg, rgba(0,0,0,0), var(--bg-color));
 }
 
 #jub-newsmore {
@@ -173,7 +183,7 @@ nav div img {
 	padding: 0.5em;
 	padding-right: 3em;
 
-	background-color: #ccc;
+	background-color: var(--bg-color);
 }
 
 /*----------------------------------------------------------------------------*\
@@ -190,15 +200,15 @@ main {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-gap: 0.2em;
-	height: 500px;
 }
 
 @media (max-width: 1011px) {
 	main { width: 100%; }
-	.jub-content { grid-template-columns: repeat(2, 1fr); height: 50em;}
+	.jub-content { grid-template-columns: repeat(2, 1fr);}
 }
 
 .jub-content article {
+	height: 250px;
 	position: relative;
 	background-color: #333;
 }
@@ -262,9 +272,13 @@ footer {
 	min-height: 5em;
 	display: flex;
 	flex-direction: row;
-	background-color: #bbb;
+	background-color: var(--bar-color);
 }
-address, #socmed-links, #feedback { padding: 1em; flex: 1; }
-h2, #socmed-links ul { margin: 0; padding: 0; } li { padding 0; display: inline; }
+#about, #socmed-links, #feedback { padding: 1em; flex: 1; }
+h3, #socmed-links ul { margin: 0; padding: 0; }
+#feedback ul { margin-left: -1em; padding 0; }
 #socmed-links li:after { content: ", "; }
 #socmed-links li:last-child:after { content: ""; }
+
+#socmed-links a { text-decoration: underline; }
+#socmed-links a:hover { color: #333; }

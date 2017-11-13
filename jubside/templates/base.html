@@ -2,7 +2,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Jubside</title>
     <!-- fonts, stylesheets and scripts -->
@@ -13,6 +12,7 @@
     <link href="{% static 'fonts/glyphicons-halflings-regular.woff2' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/customization.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jubileum.css' %}">
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <meta charset="utf-8">
@@ -22,19 +22,13 @@
 <body>
     {% include "navbar.html" %}
     {% block main %}
-        <div class="container">
-            <!-- Blog Entries Column -->
-            <div class="col-md-8">
-              {% block content %}
-              {% endblock content %}
-            </div>
+	<!-- Blog Entries Column -->
+	  {% block content %}
+	  {% endblock content %}
 
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
-                {% block sidebar %}
-                {% endblock sidebar %}
-            </div>
-        </div>
+	<!-- Blog Sidebar Widgets Column -->
+		{% block sidebar %}
+		{% endblock sidebar %}
     <!-- /.row -->
     {% endblock main %}
     {% include "footer.html" %}
