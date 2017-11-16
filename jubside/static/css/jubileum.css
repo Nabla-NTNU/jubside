@@ -17,7 +17,10 @@ a, a:visited { text-decoration: none; }
 
 /* OVERRIDE BOOTSTRAP */
 body { padding-top: 0; }
-.dropdown-menu { right: 0; left: auto!important; }
+@media only screen and (min-width: 768px) {
+	.dropdown-menu { right: 0; left: auto!important; }
+}
+.dropdown-menu .divider { padding: 0!important; }
 .dropdown-menu li a:hover { background-color: transparent; }
 
 /*----------------------------------------------------------------------------*\
