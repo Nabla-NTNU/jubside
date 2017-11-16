@@ -21,16 +21,16 @@
 </head>
 <body>
     {% include "navbar.html" %}
-    {% block main %}
-	<!-- Blog Entries Column -->
-	  {% block content %}
-	  {% endblock content %}
-
-	<!-- Blog Sidebar Widgets Column -->
-		{% block sidebar %}
-		{% endblock sidebar %}
-    <!-- /.row -->
-    {% endblock main %}
+		<main>
+	    {% block main %}
+			<!-- Blog Entries Column -->
+		  {% block content %}
+		  {% endblock content %}
+			<!-- Blog Sidebar Widgets Column -->
+			{% block sidebar %}
+			{% endblock sidebar %}
+	    <!-- /.row -->
+	    {% endblock main %}
+		</main>
     {% include "footer.html" %}
 </body>
-
