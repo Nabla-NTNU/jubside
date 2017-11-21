@@ -132,8 +132,8 @@ CACHES = {
         }
 }
 
-# All epost blir sendt til terminalen, istedet for ut til brukerne.
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Send e-post som
+DEFAULT_FROM_EMAIL = 'noreply@nabla.no'
 
 # easy_thumbnail debugging
 # Gjør at man får en feilmelding dersom thumbnail-taggen ikke klarer å lage ny
