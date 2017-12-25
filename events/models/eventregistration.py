@@ -40,7 +40,6 @@ class EventRegistration(models.Model):
     class Meta:
         verbose_name = 'påmelding'
         verbose_name_plural = 'påmeldte'
-        unique_together = (("event", "user"), ("number", "attending"))
         db_table = "content_eventregistration"
 
     objects = EventRegistrationManager()
