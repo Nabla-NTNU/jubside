@@ -23,6 +23,8 @@ class EventAdmin(ImageCroppingMixin, ChangedByMixin, admin.ModelAdmin):
               "published",
               "picture",
               "cropping",
+              "front_picture",
+              "front_cropping",
               "headline",
               "slug",
               "short_name",
