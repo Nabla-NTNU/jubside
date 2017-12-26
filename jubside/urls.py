@@ -22,7 +22,7 @@ from django.views.generic import RedirectView, TemplateView
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='frontpage'),
+    url(r'^$', views.FrontPageView.as_view(), name='frontpage'),
     url(r'^', include('user.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^album/', include('contentapps.album.urls')),
