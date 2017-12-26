@@ -1,3 +1,4 @@
+{% load static %}
 {% url 'frontpage' as jubside_frontpage %}
 {% url 'user.profile' as user_profile %}
 {% url 'user.settings' as user_settings %}
@@ -9,11 +10,12 @@
 {% url 'user.logout' as user_logout %}
 {% url 'user.login' as user_login %}
 <nav id="jub-nav">
-	<div><a href="{{ jubside_frontpage }}" class="col3">
-		<img src="75logo.png" alt="75">
-	</a></div>
 	<div id="site-navigation" aria-label="Menu">
-		<label for="toggle-mobile-menu" aria-label="Menu">&#9776;</label>
+	    <a href="{{ jubside_frontpage }}" class="col3">
+		    <img src="{% static "img/Logo-icon-jub75.png" %}" alt="75">
+	    </a>
+
+        <label for="toggle-mobile-menu" aria-label="Menu">&#9776;</label>
 		<input id="toggle-mobile-menu" type="checkbox">
 		
 		<ul id="main-menu">

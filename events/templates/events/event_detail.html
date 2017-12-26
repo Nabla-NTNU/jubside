@@ -8,9 +8,9 @@
 
 
 <div class="box">
-    {% if event.picture %}
+    {% if event.event_picture %}
     <img alt="header" class="shadow img-responsive"
-         src="{% thumbnail event.picture 1000x400 box=event.cropping upscale=True detail=True quality=95 %}">
+         src="{% thumbnail event.event_picture 1000x400 box=event.event_cropping upscale=True detail=True quality=95 %}">
     {% endif %}
 
     <header><h2>{{ event.headline }}</h2></header>

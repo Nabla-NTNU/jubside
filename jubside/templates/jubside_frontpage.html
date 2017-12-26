@@ -8,7 +8,7 @@
     {% for event in event_list %}
         <a href={{ event.get_absolute_url }}>
         <article>
-            {% if event.picture %}
+            {% if event.front_picture %}
             <img alt="header" src="{% thumbnail event.front_picture 250x250 box=event.front_cropping upscale=False detail=True quality=95 %}">
             {% endif %}
             <div class="article-title text-block">
@@ -20,118 +20,14 @@
         </a>
     {% endfor %}
 
-    <article>
-		<img src="http://www.zingerbug.com/Backgrounds/background_images/seamless_confetti_on_black.jpg" alt="1">
-		<div class="article-title text-block">
-			<h4 class="col2">ÅPNINGSFEST</h4>
-			<h4 class="col4">02. mars</h4>
-			<h4 class="col1">Provincialen</h4>
-		</div>
-	</article>
-
+<!--
 	<article>
 		<img src="bpx.png" alt="kommer">
 		<div class="article-title">
 			<h4 class="col2">KOMMER</h4>
 		</div>
 	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-		<p>
-			Pellentesque viverra elit id felis consectetur, a aliquam sem mattis. Donec in tellus nec sem auctor fringilla a ut nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In hac habitasse platea dictumst. Sed turpis erat, posuere id eleifend eget, tincidunt sit amet quam. Proin sodales, nisl a semper ultricies, risus velit euismod neque, vitae convallis odio sem sed libero. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet condimentum maximus. Proin non nulla sit amet urna laoreet viverra. Curabitur ultrices sem vel justo porta, scelerisque aliquam tellus placerat.
-		</p>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="5">
-		<div class="article-title">
-			<h4 class="col2">MAX GANGSTA</h4>
-			<h4 class="col4">07. mars</h4>
-			<h4 class="col1"></h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="8">
-		<div class="article-title">
-			<h4 class="col2">BANKETT</h4>
-			<h4 class="col4">10. mars</h4>
-			<h4 class="col1">SCANDIC LERKENDAL</h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-	</article>
-
-	<article>
-		<img src="bpx.png" alt="kommer">
-		<div class="article-title">
-			<h4 class="col2">KOMMER</h4>
-		</div>
-	</article>
+-->
 </section>
+
 {% endblock %}

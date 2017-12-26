@@ -21,8 +21,8 @@ class ChangedByMixin(object):
 class EventAdmin(ImageCroppingMixin, ChangedByMixin, admin.ModelAdmin):
     fields = ("publication_date",
               "published",
-              "picture",
-              "cropping",
+              "event_picture",
+              "event_cropping",
               "front_picture",
               "front_cropping",
               "headline",

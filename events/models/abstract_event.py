@@ -2,12 +2,9 @@ from content.models import (
     PublicationManagerMixin,
     ViewCounterMixin,
     TimeStamped,
-    WithPicture,
-    WithFrontPagePicture,
 )
 from .mixins import RegistrationInfoMixin, EventInfoMixin
 from .news.models import TextContent
-
 
 class AbstractEvent(
     RegistrationInfoMixin,
@@ -16,8 +13,6 @@ class AbstractEvent(
     ViewCounterMixin,
     TextContent,
     TimeStamped,
-    WithPicture,
-    WithFrontPagePicture,
 ):
     """
     Abstract model with the things that are common between Event and Bedpres.

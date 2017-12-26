@@ -1,12 +1,61 @@
 import logging
 from django.core.urlresolvers import reverse
 
+from django.contrib.sites.models import Site
+from image_cropping.fields import ImageRatioField
 from ..exceptions import RegistrationAlreadyExists, EventFullException, DeregistrationClosed
 from .abstract_event import AbstractEvent
 from .eventregistration import EventRegistration
+from django.db import models
+from django.conf import settings
+
+class WithEventPicture(models.Model):
+    event_picture = models.ImageField(
+        upload_to="uploads/event_pictures",
+        null=True,
+        blank=True,
+        verbose_name="Arrangementbilde",
+        help_text="Bilder som er større enn 1000x400 px ser best ut. Du kan beskjære bildet etter opplasting."
+    )
+
+    event_cropping = ImageRatioField(
+        'event_picture',
+        '1000x400',
+        allow_fullsize=False,
+        verbose_name="Beskjæring"
+    )
+
+    class Meta:
+        abstract = True
+
+    def get_picture_url(self):
+        return 'http://%s%s%s' % (Site.objects.get_current().domain, settings.MEDIA_URL, self.event_picture.name)
 
 
-class Event(AbstractEvent):
+class WithFrontPagePicture(models.Model):
+    front_picture = models.ImageField(
+        upload_to="uploads/front_page_pictures",
+        null=True,
+        blank=True,
+        verbose_name="Forsidebilde",
+        help_text="Bilder som er større enn 250x250 px og er kvadratiske ser best ut. Du kan beskjære bildet etter opplasting."
+    )
+
+    front_cropping = ImageRatioField(
+        'front_picture',
+        '250x250',
+        allow_fullsize=False,
+        verbose_name="Beskjæring"
+    )
+
+    class Meta:
+        abstract = True
+
+    def get_front_picture_url(self):
+        return 'http://%s%s%s' % (Site.objects.get_current().domain, settings.MEDIA_URL, self.front_picture.name)
+
+
+class Event(AbstractEvent, WithEventPicture, WithFrontPagePicture):
     """Arrangementer både med og uten påmelding.
     Dukker opp som nyheter på forsiden.
     """
