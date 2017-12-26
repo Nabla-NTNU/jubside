@@ -1,17 +1,8 @@
 {% load humanize %}
 
 <!-- event-info -->
-<h3 class="pull-left">Informasjon </h3>
 
-
-{% if event.facebook_url %}
-<h3 class="pull-right">
-    <a target="_blank" href="{{ event.facebook_url }}" class="btn btn-default btn-sm">
-        <span class="fa fa-facebook-square"></span>
-        Vis på Facebook
-    </a>
-</h3>
-{% endif %}
+<h3 class="pull-left form-group">Informasjon </h3>
 
 <table class="table table-bordered table-striped content-info" style="table-layout: fixed;">
 
@@ -154,9 +145,21 @@
 </div>
 {% endif %}
 
+{% comment Does anybody use this button?%}
 <div class="center">
-<a class="btn btn-default btn-xs" href="{% url "ical_event" event.pk %}">
+<a class="btn btn-block btn-basic" href="{% url "ical_event" event.pk %}">
     <span class="glyphicon glyphicon-calendar"></span>
     iCalendar
 </a>
 </div>
+{% endcomment %}
+
+
+{% if event.facebook_url %}
+
+    <a target="_blank" href="{{ event.facebook_url }}" class="btn btn-block btn-info">
+        <span class="fa fa-facebook-square">
+                Facebook-arrangement
+        </span>
+    </a>
+{% endif %}

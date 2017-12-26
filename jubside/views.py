@@ -1,9 +1,15 @@
-from django.shortcuts import render, redirect
+from django.views.generic import ListView
+from events.models import Event
 
 # Create your views here.
 
-from django.http import HttpResponse
+class FrontPageView(ListView):
+    template_name = 'jubside_frontpage.html'
 
+    model = Event
 
-def index(request):
-    return render(request, 'jubside_frontpage.html')
+    queryset = Event.objects.order_by('event_start')
+
+    def get_context_data(self, **kwargs):
+        context = super(FrontPageView, self).get_context_data(**kwargs)
+        return context

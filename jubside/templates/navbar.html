@@ -1,4 +1,4 @@
-{% url 'jubside.frontpage' as jubside_frontpage %}
+{% url 'frontpage' as jubside_frontpage %}
 {% url 'user.profile' as user_profile %}
 {% url 'user.settings' as user_settings %}
 {% url 'user.change_password' as user_change_password %}
@@ -17,10 +17,10 @@
 		<input id="toggle-mobile-menu" type="checkbox">
 		
 		<ul id="main-menu">
-			<li {% if request.path == jubside_frontpage %}class="active"{% endif %}><a href="{{ jubside_frontpage }}" class="col3">Hjem</a></li>
-			<li><a href="#album" class="col5">Album</a></li>
-			<li><a href="#news" class="col1">Nyheter</a></li>
-			<li><a href="#alumni" class="col4">Alumni</a></li>
+			<li style="text-align: center" {% if request.path == jubside_frontpage %}class="active"{% endif %}><a href="{{ jubside_frontpage }}" class="col3">Hjem</a></li>
+			<li style="text-align: center"><a href="#album" class="col5">Album</a></li>
+			<li style="text-align: center"><a href="#news" class="col1">Nyheter</a></li>
+			<li style="text-align: center"><a href="#alumni" class="col4">Alumni</a></li>
 		</ul>
 
 		<ul id="user-block">
@@ -44,6 +44,7 @@
 		</ul>
 	</div>
 </nav>
+<!--
 <nav id="jub-newsflash">
 	<ul>
 		<li>KOMPONENTER VILLE ETTER BILLETTER (28. februar)</li>
@@ -55,3 +56,4 @@
 		Flere nyheter
 	</span>
 </nav>
+-->
