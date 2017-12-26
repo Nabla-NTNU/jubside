@@ -1,10 +1,28 @@
 {% extends "base.html" %}
+{% load easy_thumbnails %}
 {% block content %}
 <h1>DET ER BARE 120 DAGER IGJEN</h1>
+<!-- GOD JUL! -->
 <section id="jub-news" class="jub-content">
-	<article>
-		<img src="bpx.png" alt="1">
-		<div class="article-title">
+
+    {% for event in event_list %}
+        <a href={{ event.get_absolute_url }}>
+        <article>
+            {% if event.picture %}
+            <img alt="header" src="{% thumbnail event.front_picture 250x250 box=event.front_cropping upscale=False detail=True quality=95 %}">
+            {% endif %}
+            <div class="article-title text-block">
+                <h4 class="col2">{{ event.headline }}</h4>
+                <h4 class="col4">{{ event.event_start|date:"j. N"}}</h4>
+                <h4 class="col1">{{ event.location }}</h4>
+            </div>
+        </article>
+        </a>
+    {% endfor %}
+
+    <article>
+		<img src="http://www.zingerbug.com/Backgrounds/background_images/seamless_confetti_on_black.jpg" alt="1">
+		<div class="article-title text-block">
 			<h4 class="col2">ÅPNINGSFEST</h4>
 			<h4 class="col4">02. mars</h4>
 			<h4 class="col1">Provincialen</h4>

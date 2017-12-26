@@ -9,8 +9,8 @@
 
 <div class="box">
     {% if event.picture %}
-    <img alt="header" class="img-responsive"
-         src="{% thumbnail event.picture 760x300 box=event.cropping upscale=True detail=True quality=95 %}">
+    <img alt="header" class="shadow img-responsive"
+         src="{% thumbnail event.picture 1000x400 box=event.cropping upscale=True detail=True quality=95 %}">
     {% endif %}
 
     <header><h2>{{ event.headline }}</h2></header>
@@ -46,8 +46,9 @@
 
 
 {% block sidebar %}
-
+<br>
 {% include "events/includes/info.html" with event=event %}
+<br>
 {% include "content/includes/meta.html" with content=event %}
 {% include "events/includes/sidebar-admin.html" %}
 
