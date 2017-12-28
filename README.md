@@ -11,10 +11,12 @@ Backenddelen av nettsiden er skrevet i [django](http://djangoproject.org).
 * python 3.4 (eller nyere)
 
 ## Mappestruktur ##
-- jubside -- settings og base-html for hele siden (og forside? ikke laget enda)
-- user -- django-appen for hvordan brukerkontoer fungerer (opprettelse, rettigheter, osv.)'
+- jubside -- settings og base-html for hele siden, deler av forside (avhengig av arrangement fra events)
+- user -- django-appen for hvordan brukerkontoer fungerer (opprettelse, rettigheter, osv.)
+- events -- django-appen for arrangement
+- album -- django-app som gir oss album...
 
-## KjÃ¸re siden ##
+## Kjøre siden ##
 * Klone repoet
 * Sett opp et virtual environment
 * pip install -r requirements.txt
