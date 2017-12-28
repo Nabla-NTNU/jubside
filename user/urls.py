@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^min-profil/$', views.profile, name='user.profile'),
     # bruker - innstillings relatert
     url(r'^min-profil/innstillinger/$', views.settings, name='user.settings'),
+    url(r'^min-profil/innstillinger/endre-informasjon/$', views.profileUpdate, name='user.update'),
     url(r'^min-profil/innstillinger/endre-passord/$', auth_views.PasswordChangeView.as_view(template_name='settings/user_password_change.html', success_url=reverse_lazy('user.change_password_done')),
         name='user.change_password'),
     url(r'^min-profil/innstillinger/endre-passord/endret/$', auth_views.PasswordChangeView.as_view(template_name='settings/user_password_change_done.html'),

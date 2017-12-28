@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.http import is_safe_url
-from .forms import RegistrationForm
+from .forms import RegistrationForm, UpdateUserForm
 from django.core.exceptions import PermissionDenied
 from . models import User
 
@@ -60,6 +60,48 @@ def registration(request):
 
         return render(request, 'user_registration.html', {'form': form, 'done': done})
 
+def profileUpdate(request):
+
+    # check if user is already logged in
+    if request.user.is_authenticated:
+
+        # check if post method is being performed
+        if request.method == "POST":
+            form = UpdateUserForm(request.POST)
+            # validate form
+            if form.is_valid():
+                update = form.save(commit=False)
+                if update.first_name:
+                    request.user.first_name = update.first_name
+                if update.last_name:
+                    request.user.last_name = update.last_name
+                if update.starting_year:
+                    request.user.starting_year = update.starting_year
+                if update.allergies:
+                    request.user.allergies = update.allergies
+                request.user.save()
+                # redirect with success message
+                return redirect(reverse('user.settings') + '?reg=1')
+
+            else:
+                # redirect with error message
+                return render(request, 'user_update.html', {'form': form})
+
+        else:
+            form = UpdateUserForm()
+
+        # registration completed
+        if request.GET.get('reg') == '1':
+            done = True
+        else:
+            done = False
+
+        return render(request, 'user_update.html', {'form': form, 'done': done})
+
+    else:
+        raise PermissionDenied
+
+
 # Recover user password
 def recover(request):
     if request.user.is_authenticated:
@@ -94,12 +136,7 @@ def recover(request):
 # Displays user profile
 def profile(request):
     if request.user.is_authenticated:
-
-        # Check if user is in the event manager group (which contains correct permissions)
-        is_event_manager = request.user.groups.filter(name='event_management').exists()
-
-        return render(request, 'user_profile.html', {'is_event_manager': is_event_manager})
-
+        return render(request, 'user_profile.html', {'is_authenticated': request.user.is_authenticated})
     else:
         raise PermissionDenied
 

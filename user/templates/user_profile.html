@@ -4,8 +4,14 @@
     <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+            {% if user.is_authenticated %}
+            {% if not user.starting_year %}
+            <div class="alert alert-warning">
+                <strong>OBS!</strong> Profilen din mangler "årskull". Legg til dette under "innstillinger" for å kunne melde deg på arrangement.
+            </div>
+            {% endif %}
+            {% endif %}
             <div class="panel panel-default">
-                <div class="panel-heading">Min profil</div>
                 <div class="panel-body">
                     <h4 class="text-center">Velkommen {{ user.first_name }}!</h4>
                     <br>
@@ -14,8 +20,8 @@
                     {% if perms.user.can_view_users %}
                         <a class="btn btn-success btn-block" href="{% url 'user.registerapplicants' %}"><span class="glyphicon glyphicon-user"></span> Brukere</a>
                     {% endif %}
-                    {% if is_event_manager %}
-                        <a class="btn btn-success btn-block" href="{% url 'admin:index' %}happenings"><span class="glyphicon glyphicon-cog"></span> Arrangement admin</a>
+                    {% if perms.user.admin %}
+                        <a class="btn btn-success btn-block" href="{% url 'admin:index' %}"><span class="glyphicon glyphicon-cog"></span> Admin</a>
                     {% endif %}
                     <a class="btn btn-danger btn-block" href="{% url 'user.logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logg ut</a>
                 </div>
