@@ -1,9 +1,23 @@
 .countdownHolder{
-	width:450px;
+	width:100%;
 	margin:0 auto;
 	font: 40px/1.5 'Open Sans Condensed',sans-serif;
 	text-align:center;
 	letter-spacing:-3px;
+	white-space: nowrap;
+	-webkit-transform: scale(1.5);
+}
+
+@media only screen and (max-device-width:769px) {
+	.countdownHolder {
+		-webkit-transform: scale(1.1);
+	}
+}
+
+@media only screen and (max-device-width:480px) {
+	.countdownHolder {
+		-webkit-transform: scale(0.7);
+	}
 }
 
 .position{
