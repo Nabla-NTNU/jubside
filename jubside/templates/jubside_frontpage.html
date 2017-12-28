@@ -1,8 +1,19 @@
 {% extends "base.html" %}
 {% load easy_thumbnails %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
+    <link rel="stylesheet" href= ={% static "countdown/css/styles.css" %}/>
+    <link rel="stylesheet" href={% static "countdown/countdown/jquery.countdown.css" %}/>
+{% endblock %}
 {% block content %}
-<h1>DET ER BARE 120 DAGER IGJEN</h1>
-<!-- GOD JUL! -->
+
+    <div id="countdown"></div>
+    <br>
+    <!-- JavaScript includes -->
+    <script src={% static "countdown/countdown/jquery.countdown.js" %}></script>
+    <script src={% static "countdown/js/script.js" %}></script>
+
 <section id="jub-news" class="jub-content">
 
     {% for event in event_list %}
