@@ -24,8 +24,8 @@
 <!--
             <li style="text-align: center"><a href="#news" data-toggle="popover" title="Popover Header" data-content="Under utvikling" class="col1">Nyheter</a></li>
 			<li style="text-align: center"><a href="#alumni" class="col4">Alumni</a></li>
-		</ul>
 -->
+		</ul>
 		<ul id="user-block">
 			{% if user.is_authenticated %}
 			  <li class="dropdown{% if request.path == user_registerapplicants or request.path == user_profile or request.path == user_settings or request.path == user_change_password or request.path == user_events %} active{% else %}{% endif %}">
