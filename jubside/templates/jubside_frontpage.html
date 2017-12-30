@@ -16,6 +16,7 @@
 <section id="jub-news" class="jub-content">
 
     {% for event in event_list %}
+        {% if event.published %}
         <a href={{ event.get_absolute_url }}>
         <article>
             {% if event.front_picture %}
@@ -28,6 +29,7 @@
             </div>
         </article>
         </a>
+        {% endif %}
     {% endfor %}
 
 <!--
