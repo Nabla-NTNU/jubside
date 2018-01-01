@@ -4,7 +4,7 @@ from django.utils.http import is_safe_url
 from .forms import RegistrationForm, UpdateUserForm
 from django.core.exceptions import PermissionDenied
 from . models import User
-
+from events.models.eventregistration import EventRegistration
 
 # Register user
 def registration(request):
@@ -77,8 +77,10 @@ def profileUpdate(request):
                     request.user.last_name = update.last_name
                 if update.starting_year:
                     request.user.starting_year = update.starting_year
-                if update.allergies:
-                    request.user.allergies = update.allergies
+
+                # must allow none
+                request.user.allergies = update.allergies
+
                 request.user.save()
                 # redirect with success message
                 return redirect(reverse('user.settings') + '?reg=1')
@@ -88,7 +90,7 @@ def profileUpdate(request):
                 return render(request, 'user_update.html', {'form': form})
 
         else:
-            form = UpdateUserForm()
+            form = UpdateUserForm(instance=User.objects.get(id=request.user.id))
 
         # registration completed
         if request.GET.get('reg') == '1':
@@ -150,7 +152,9 @@ def settings(request):
 # Lists all events you have signed up on
 def events(request):
     if request.user.is_authenticated:
-        return render(request, 'user_events.html')
+        attending_events = EventRegistration.objects.all().filter(user=request.user, attending=True)
+        on_waiting_list = EventRegistration.objects.all().filter(user=request.user, attending=False)
+        return render(request, 'user_events.html', {'attending_events': attending_events, 'on_waiting_list': on_waiting_list})
     else:
         raise PermissionDenied
 

@@ -4,8 +4,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-                <a class="btn btn-primary btn-block" href="{% url 'user.change_password' %}">Endre passord</a>
-            <br>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         {% if form.errors %}
@@ -39,7 +37,7 @@
                                     {{ form.starting_year }}
                                 </div>
                                 <br>
-                                <label>Allergier (+div, f.eks. vegetar)</label>
+                                <label>Allergier og/eller spesielle matbehov</label>
                                 <div class="input-group">
                                     <span class="input-group-addon "><span class="glyphicon glyphicon-apple"></span></span>
                                     {{ form.allergies }}
