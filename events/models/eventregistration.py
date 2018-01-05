@@ -1,9 +1,10 @@
 from django.db import models
 from django.conf import settings
 from django.template import loader
+import uuid
+
 
 from .managers import RelatedEventRegistrationManager, EventRegistrationManager
-
 
 class EventRegistration(models.Model):
     """Modell for påmelding på arrangementer.
@@ -43,6 +44,14 @@ class EventRegistration(models.Model):
         null=False,
         help_text="Hvis sann har den påmeldte betalt for billett."
     )
+    ticket_id = models.UUIDField(
+        verbose_name="unik billett id",
+        unique=True,
+        default=uuid.uuid4,
+        editable=False,
+        help_text="Unik id som ingen kan gjette seg til.."
+    )
+
 
     class Meta:
         verbose_name = 'påmelding'
