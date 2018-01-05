@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'django_markdown',
     'markdown',
     'sekizai',
+    'qr_code'
 ]
 
 AUTH_USER_MODEL = 'user.User'
