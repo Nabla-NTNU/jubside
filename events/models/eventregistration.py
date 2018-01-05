@@ -36,6 +36,13 @@ class EventRegistration(models.Model):
         blank=False,
         null=False,
         help_text="Hvis denne er satt til sann har man en plass på arrangementet ellers er det en ventelisteplass.")
+    has_paid = models.BooleanField(
+        verbose_name='Har betalt',
+        default=False,
+        blank=False,
+        null=False,
+        help_text="Hvis sann har den påmeldte betalt for billett."
+    )
 
     class Meta:
         verbose_name = 'påmelding'
@@ -86,3 +93,6 @@ class EventRegistration(models.Model):
             message = template.render({'event': self.event, 'name': self.user.get_full_name()})
             self.user.email_user(subject, message)
 
+    def set_has_paid(self):
+        self.has_paid = True
+        self.save()

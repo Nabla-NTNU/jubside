@@ -48,8 +48,10 @@ class AdministerRegistrationsView(StaticContextMixin,
     model = Event
     template_name = "events/event_administer.html"
     permission_required = 'events.administer'
-    actions = {"add": ("Legg til", "register_user"),
-               "del": ("Fjern", "deregister_users")}
+    actions = {"pay": ("Bekreft betaling", "set_paid_user"),
+               "add": ("Legg til deltager", "register_user"),
+               "del": ("Fjern deltager", "deregister_users")
+               }
     static_context = {'actions': [(key, name) for key, (name, _) in actions.items()]}
 
     def post(self, request, pk):
@@ -76,7 +78,14 @@ class AdministerRegistrationsView(StaticContextMixin,
                 self.get_object().deregister_user(user)
             except (User.DoesNotExist, UserRegistrationException):
                 pass
-
+    def set_paid_user(self):
+        user_list = self.request.POST.getlist('user')
+        for username in user_list:
+            try:
+                user = User.objects.get(username=username)
+                self.get_object().set_paid_user(user)
+            except (User.DoesNotExist, UserRegistrationException):
+                pass
 
 def calendar(request, year=None, month=None):
     """

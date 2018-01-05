@@ -179,3 +179,7 @@ class Event(AbstractEvent, WithEventPicture, WithFrontPagePicture):
 
     def get_absolute_url(self):
         return reverse("event_detail", kwargs={'pk': self.pk, 'slug': self.slug})
+
+    def set_paid_user(self, user):
+        reg = self.eventregistration_set.get(user=user)
+        reg.set_has_paid()
