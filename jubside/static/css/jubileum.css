@@ -11,6 +11,7 @@ body {
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 }
 address { font-style: normal; }
 a, a:visited { text-decoration: none; }
@@ -213,6 +214,7 @@ main {
 	height: 250px;
 	position: relative;
 	background-color: #333;
+	word-break: break-all;
 }
 
 @media (max-width: 502px) {
