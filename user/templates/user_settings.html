@@ -5,6 +5,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
                 <div class="panel panel-default">
+                    <div class="panel-heading">Innstillinger</div>
                     <div class="panel-body">
                         {% if user.is_authenticated %}
                                 {% csrf_token %}
@@ -23,7 +24,7 @@
                                     <span class="input-group-addon ">{{ user.last_name }}</span>
                                 </div>
                                 <br>
-                                <label>Årskull</label>
+                                <label>Startår</label>
                                 <div class="info">
                                     <span class="input-group-addon ">{{ user.starting_year }}</span>
                                 </div>

@@ -218,7 +218,7 @@ main {
 }
 
 @media (max-width: 502px) {
-	main { width: 100%; }
+	main { width: 98%; }
 	.jub-content { grid-template-columns: repeat(2, 1fr);}
     .jub-content article { height: 50%;}
 }

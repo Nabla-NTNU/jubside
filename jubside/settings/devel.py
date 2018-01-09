@@ -85,6 +85,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Custom session cookie
+SESSION_COOKIE_NAME = 'jubsess_id'
+
 ROOT_URLCONF = 'jubside.urls'
 
 TEMPLATES = [

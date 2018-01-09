@@ -138,11 +138,14 @@ class EventDetailView(AdminLinksMixin, MessageMixin, DetailView):
         if user.is_authenticated():
             # Innlogget, så sjekk om de er påmeldt
             try:
+                context['is_authenticated'] = True
                 context['is_registered'] = event.is_registered(user)
                 context['is_attending'] = event.is_attending(user)
                 context['is_waiting'] = event.is_waiting(user)
             except EventException as e:
                 self.messages.error(e)
+        else:
+            context['is_authenticated'] = False
         return context
 
 

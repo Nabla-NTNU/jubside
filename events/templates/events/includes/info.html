@@ -79,55 +79,57 @@
             {% elif is_waiting %}
                 Du står på venteliste
             {% else %}
-                Påmelding kreves
+                Påmelding kreves{% if not is_authenticated %}. Logg inn for å få tilgang.{% endif %}
             {% endif %}
         </td>
     </tr>
 
     <!-- På/Avmeldingsknapp -->
-    <form name="registration" action="{{ event.get_registration_url }}" method="post">
-    {% csrf_token %}
-    <tr><td colspan="2" style="text-align: center;">
-        {% if not is_registered %} {# Show registration button #}
-            <input type="hidden" name="registration_type" value="registration">
-            {% if user.starting_year %}
-                {% if event.registration_open %}
-                    <input type="submit"
-                       class="btn btn-primary"
-                       value="Meld deg på {% if event.has_queue and event.is_full %}ventelisten{% endif %}">
+    {% if is_authenticated %}
+        <form name="registration" action="{{ event.get_registration_url }}" method="post">
+        {% csrf_token %}
+        <tr><td colspan="2" style="text-align: center;">
+            {% if not is_registered %} {# Show registration button #}
+                <input type="hidden" name="registration_type" value="registration">
+                {% if user.starting_year %}
+                    {% if event.registration_open %}
+                        <input type="submit"
+                           class="btn btn-primary"
+                           value="Meld deg på {% if event.has_queue and event.is_full %}ventelisten{% endif %}">
+                    {% else %}
+                        Påmeldingen er stengt.
+                    {% endif %}
                 {% else %}
-                    Påmeldingen er stengt.
+                        <a href="{% url 'user.settings' %}"><div class="btn btn-warning">Registrer kull på din profil for <br> å få tilgang til påmeldinger</div></a>
                 {% endif %}
-            {% else %}
-                    <a href="{% url 'user.settings' %}"><div class="btn btn-warning">Registrer kull på din profil for å få tilgang til påmeldinger</div></a>
+            {% else %} {# Show deregistration button #}
+                <input type="hidden" name="registration_type" value="deregistration">
+                {% if event.deregistration_closed %}
+                    Avmeldingsfristen er ute.
+                {% else %}
+                    <a href="#"
+                       id="meld-av"
+                       class="btn btn-primary">Meld deg av
+                        {% if is_waiting %}ventelisten{% endif %}
+                    </a>
+                    <br>
+                    <input type="submit"
+                           id="meld-av-confirm"
+                           class="btn btn-primary btn-warning"
+                           value="Er du sikker?"
+                            >
+                    <script>
+                        $("#meld-av-confirm").hide();
+                        $("#meld-av").on("click", function(event) {
+                            event.preventDefault();
+                            $("#meld-av-confirm").slideDown();
+                        });
+                    </script>
+                {% endif %}
             {% endif %}
-        {% else %} {# Show deregistration button #}
-            <input type="hidden" name="registration_type" value="deregistration">
-            {% if event.deregistration_closed %}
-                Avmeldingsfristen er ute.
-            {% else %}
-                <a href="#"
-                   id="meld-av"
-                   class="btn btn-primary">Meld deg av
-                    {% if is_waiting %}ventelisten{% endif %}
-                </a>
-                <br>
-                <input type="submit"
-                       id="meld-av-confirm"
-                       class="btn btn-primary btn-warning"
-                       value="Er du sikker?"
-                        >
-                <script>
-                    $("#meld-av-confirm").hide();
-                    $("#meld-av").on("click", function(event) {
-                        event.preventDefault();
-                        $("#meld-av-confirm").slideDown();
-                    });
-                </script>
-            {% endif %}
-        {% endif %}
-    </td></tr>
-    </form>
+        </td></tr>
+        </form>
+    {% endif %}
 {% endif %}
 </table>
 

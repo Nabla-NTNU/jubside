@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils.http import is_safe_url
 from .forms import RegistrationForm, UpdateUserForm
 from django.core.exceptions import PermissionDenied
+from django.core.mail import send_mail
 from . models import User
 from events.models.eventregistration import EventRegistration
 
@@ -36,6 +37,7 @@ def registration(request):
                                                     first_name=form.cleaned_data['first_name'],
                                                     last_name=form.cleaned_data['last_name'],
                                                     starting_year=form.cleaned_data['starting_year'],
+                                                    allergies=form.cleaned_data['allergies'],
                                                     is_active = False,
                                                     account_verified = False,
                                                     is_awaiting_approval = True
@@ -206,6 +208,9 @@ def changeapplicants(request, action, userid):
             user.is_awaiting_approval = False
             user.is_active = True
             user.save(update_fields=["is_awaiting_approval", "is_active"])
+
+            # send email regarding accepted user
+            send_mail("Du har blitt godkjent", "Din bruker på https://jubileum.nabla.no har blitt godkjent. Du kan nå logge inn.", 'noreply@nabla.no', [user.email])
 
             # redirect to register applicants with msg = 1 (meaning approved)
             return redirect(reverse('user.registerapplicants') + '?msg=1')

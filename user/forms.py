@@ -12,7 +12,7 @@ class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'smart@nobel.de', 'required': 'true'}))
     first_name = forms.CharField(max_length=80, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Albert', 'required': 'true'}))
     last_name = forms.CharField(max_length=80, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Einstein', 'required': 'true'}))
-    starting_year = forms.CharField(validators=[numeric_only], required=True, max_length=4, min_length=4, widget=forms.TextInput(attrs={'class': 'form-control', 'pattern':'[0-9]{4}', 'placeholder': '1896', 'required': 'true'}))
+    starting_year = forms.CharField(validators=[numeric_only], required=True, max_length=4, min_length=4, widget=forms.TextInput(attrs={'class': 'form-control', 'pattern':'[0-9]{4}', 'placeholder': '1896 (året du begynte på fysmat/kullet du fulgte)', 'required': 'true'}))
     allergies = forms.CharField(required=False, max_length=200, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Allergier'}))
     spam_bot_check = forms.IntegerField(required=True, validators=[spam_bot_validator], widget=forms.TextInput(attrs={'class': 'git form-control', 'placeholder': 'Svaret på oppgaven', 'required': 'true'}))
 
