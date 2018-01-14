@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="" method="post" class="form">{% csrf_token %}
+    <div class="form-inline">
+        <input class="form-control" type="text" name="text" size="40" maxlength="100" />
+    </div>
+</form>
+    <h1>Tallplass: {{ number }}</h1>
+    {% if copy == "True" %}
+    <div class="btn-block bg-danger">
+        <h3>Denne billetten er allerede brukt! Innsjekk skjedde: {{ check_in_time }}</h3>
+    </div>
+{% endif %}
+
+<div class="table-bordered">
+    Navn: {{ first_name }} {{ last_name }}<br>
+    Email: {{ email }}<br>
+    Startår: {{ starting_year }}<br>
+    Allergier/matbehov: {{ allergies }}<br>
+    Har betalt: {{ has_paid }}<br>
+    Sjekket inn: {{ checked_in }}<br>
+</div>
+{% endblock %}
