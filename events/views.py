@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.template import loader
 from django.views.generic import TemplateView, DetailView
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth.backends import ModelBackend
 from django.utils.safestring import mark_safe
 
 import datetime
@@ -16,7 +16,7 @@ from braces.views import (PermissionRequiredMixin,
 
 from .event_overrides import get_eventgetter
 
-from .models import Event
+from .models import Event, EventRegistration
 from .exceptions import *
 from .event_calendar import EventCalendar
 
@@ -39,6 +39,78 @@ class AdminLinksMixin(object):
 
 User = get_user_model()
 EventGetter = get_eventgetter()
+
+class TicketView(LoginRequiredMixin,
+                DetailView):
+    model = Event
+    context_object_name = 'reg'
+    template_name = "events/event_ticket.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        event = self.object
+        number = self.request.GET.get('number')
+        reg = EventRegistration.objects.get(event=event, number=number)
+        context.update({'user': self.request.user,
+                        'permission': self.request.user.has_perm('events.administer'),
+                        'first_name': reg.user.first_name,
+                        'last_name': reg.user.last_name,
+                        'email': reg.user.email,
+                        'allergies': reg.user.allergies,
+                        'starting_year': reg.user.starting_year,
+                        'has_paid': reg.has_paid,
+                        'ticket_id': reg.ticket_id,
+                        'checked_in': reg.checked_in,
+                        'check_in_time': reg.check_in_time,
+                        'number': number,
+                        'user_number': str(EventRegistration.objects.get(event=event, user=self.request.user).number)})
+        return context
+
+
+class TicketCheckView(PermissionRequiredMixin,
+                      DetailView):
+    model = Event
+    context_object_name = 'reg'
+    template_name = "events/event_ticket_check.html"
+    permission_required = 'events.administer'
+
+    def post(self, request, pk):
+        """Sjekker inn brukeren i POST['text'] hvis id-en tilhører en bruker som har betalt."""
+        ticket_id = request.POST.get('text')
+        try:
+            event = self.get_object()
+            reg = EventRegistration.objects.get(event=event, ticket_id=ticket_id)
+            copy = False
+            if not reg.checked_in:
+                reg.checked_in = True
+                reg.check_in_time = datetime.datetime.now()
+                reg.save()
+            else:
+                copy = True
+            return HttpResponseRedirect("%s%s%s" % (reverse("check_in", kwargs={'pk': pk}), "?num=" + str(reg.number), "&copy=" + str(copy)))
+
+        except (Event.DoesNotExist, EventRegistration.DoesNotExist):
+            pass
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        event = self.object
+        number = self.request.GET.get('num')
+        copy = self.request.GET.get('copy')
+        if not number: number = 1
+        reg = EventRegistration.objects.get(event=event, number=number)
+        context.update({'first_name': reg.user.first_name,
+                   'last_name': reg.user.last_name,
+                   'email': reg.user.email,
+                   'allergies': reg.user.allergies,
+                   'starting_year': reg.user.starting_year,
+                   'has_paid': reg.has_paid,
+                   'checked_in': reg.checked_in,
+                   'check_in_time': reg.check_in_time,
+                   'number': number,
+                   'copy': copy})
+        return context
 
 
 class AdministerRegistrationsView(StaticContextMixin,
@@ -151,6 +223,8 @@ class EventDetailView(AdminLinksMixin, MessageMixin, DetailView):
                 context['is_registered'] = event.is_registered(user)
                 context['is_attending'] = event.is_attending(user)
                 context['is_waiting'] = event.is_waiting(user)
+                context['has_paid'] = event.has_paid(user)
+                context['ticket_url_end'] = "?number=" + str(event.get_place(user))
             except EventException as e:
                 self.messages.error(e)
         else:
