@@ -183,3 +183,9 @@ class Event(AbstractEvent, WithEventPicture, WithFrontPagePicture):
     def set_paid_user(self, user):
         reg = self.eventregistration_set.get(user=user)
         reg.set_has_paid()
+
+    def has_paid(self, user):
+        return self.eventregistration_set.filter(user=user, has_paid=True).exists()
+
+    def get_place(self, user):
+        return self.eventregistration_set.get(user=user).number
