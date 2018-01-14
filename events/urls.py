@@ -1,13 +1,5 @@
 from django.conf.urls import url
-from .views import (
-    AdministerRegistrationsView,
-    calendar,
-    UserEventView,
-    RegisterUserView,
-    EventDetailView,
-    EventRegistrationsView,
-    ical_event,
-)
+from .views import *
 from .feeds import RecentEvents
 
 urlpatterns = [
@@ -46,4 +38,11 @@ urlpatterns = [
     url(r'^feed/$',
         RecentEvents(),
         name="event_feed"),
+
+    url(r'^(?P<pk>\d{1,8})/check_in/',
+        TicketCheckView.as_view(),
+        name="check_in"),
+    url(r'^(?P<pk>\d{1,8})/ticket/',
+        TicketView.as_view(),
+        name="ticket")
 ]
