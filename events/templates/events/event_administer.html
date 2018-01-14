@@ -44,8 +44,8 @@ $(document).ready(function() {
                 <option value="{{ int_name }}">{{ ext_name }}</option>
             {% endfor %}
         </select>
-        <input class="form-control" type="text" name="text" size="20" maxlength="30" />
-        <div id="confirm-inital" class="form-control btn">Utfør</div>
+        <input class="form-control" type="text" name="text" size="40" maxlength="100" />
+        <div id="confirm-inital" class="form-control">Utfør</div>
         <input id="confirm-final" class="form-control" type="submit" name="commit_changes" value="Er du sikker?">
         <script>
             $("#confirm-final").hide();
@@ -69,14 +69,14 @@ $(document).ready(function() {
                     <th>Navn</th>
                     <th>Email</th>
                     <th>Har betalt</th>
-                    <th align="center">X</th>
+                    <th>Velg</th>
                 </tr>
             </thead>
 
             <tbody>
                 {% with regs=event.attending_registrations %}
                 {% for reg in regs %}
-                    <tr class="bg-success">
+                    <tr class="bg-white">
                         <td>{{ reg.number }}</td>
                         <td>{{ reg.user.get_full_name }}</td>
                         <td>{{ reg.user.email }}</td>
