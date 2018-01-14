@@ -51,7 +51,19 @@ class EventRegistration(models.Model):
         editable=False,
         help_text="Unik id som ingen kan gjette seg til.."
     )
-
+    checked_in = models.BooleanField(
+        verbose_name="Sjekket inn",
+        default=False,
+        help_text="Om personen har sjekket inn på arrangementet.",
+        blank=False,
+        null=False
+    )
+    check_in_time = models.DateTimeField(
+        verbose_name="Innsjekkstidspunkt",
+        blank=True,
+        null=True,
+        help_text="Hvis sjekket inn: tidspunkt for innsjekk."
+    )
 
     class Meta:
         verbose_name = 'påmelding'
