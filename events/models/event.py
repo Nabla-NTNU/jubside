@@ -188,7 +188,10 @@ class Event(AbstractEvent, WithEventPicture, WithFrontPagePicture):
         return self.eventregistration_set.filter(user=user, has_paid=True).exists()
 
     def get_place(self, user):
-        return self.eventregistration_set.get(user=user).number
+        if self.eventregistration_set.filter(user=user).exists():
+            return self.eventregistration_set.get(user=user).number
+        else:
+            return False
 
     def send_ticket(self, user):
         reg = self.eventregistration_set.get(user=user)
