@@ -4,22 +4,35 @@
 
 <form action="" method="post" class="form">{% csrf_token %}
     <div class="form-inline">
-        <input class="form-control" type="text" name="text" size="40" maxlength="100" />
+        <input id="ticket" class="form-control" type="text" name="text" size="40" maxlength="100" />
     </div>
 </form>
+{% if is_ticket == True %}
     <h1>Tallplass: {{ number }}</h1>
     {% if copy == "True" %}
     <div class="btn-block bg-danger">
         <h3>Denne billetten er allerede brukt! Innsjekk skjedde: {{ check_in_time }}</h3>
     </div>
+    {% endif %}
+
+
+    <div class="table-bordered">
+        Navn: {{ first_name }} {{ last_name }}<br>
+        Email: {{ email }}<br>
+        Startår: {{ starting_year }}<br>
+        Allergier/matbehov: {{ allergies }}<br>
+        Har betalt: {{ has_paid }}<br>
+        Sjekket inn: {{ checked_in }}<br>
+    </div>
+{% else %}
+
+    <div class="alert alert-danger">
+        <h1>Dette er ikke en gyldig billett!</h1>
+    </div>
+
 {% endif %}
 
-<div class="table-bordered">
-    Navn: {{ first_name }} {{ last_name }}<br>
-    Email: {{ email }}<br>
-    Startår: {{ starting_year }}<br>
-    Allergier/matbehov: {{ allergies }}<br>
-    Har betalt: {{ has_paid }}<br>
-    Sjekket inn: {{ checked_in }}<br>
-</div>
+    <script>
+        $("#ticket").focus();
+    </script>
 {% endblock %}
