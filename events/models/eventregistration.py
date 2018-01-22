@@ -128,7 +128,7 @@ class EventRegistration(models.Model):
 
     def send_ticket(self):
         if self.user.email:
-            subject = 'Billett til %s' % self.event.headline
+            subject = 'Billett til %s - Nablas 75-årsjubileum' % self.event.headline
             template = loader.get_template("events/ticket_email.html")
             c = {'event': self.event, 'name': self.user.get_full_name(), 'ticket_id': self.ticket_id}
             message = template.render(c)
