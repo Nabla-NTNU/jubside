@@ -9,3 +9,4 @@ git+https://bitbucket.org/webkom/content-app.git@1e451bfd956fcdbfa8df2d5bb834137
 gunicorn==19.7.1
 PyMySQL==0.7.11
 django-qr-code==0.3.3
+django-naomi==0.8

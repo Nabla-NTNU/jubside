@@ -71,7 +71,8 @@ INSTALLED_APPS = [
     'django_markdown',
     'markdown',
     'sekizai',
-    'qr_code'
+    'qr_code',
+    'naomi',
 ]
 
 AUTH_USER_MODEL = 'user.User'
@@ -126,8 +127,9 @@ CACHES = {
         }
 }
 
-# All epost blir sendt til terminalen, istedet for ut til brukerne.
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# All epost blir åpnet i nettleseren og lagret som en html-fil, istedet for å sendes ut til brukerne.
+EMAIL_BACKEND = "naomi.mail.backends.naomi.NaomiBackend"
+EMAIL_FILE_PATH = os.path.join(VARIABLE_CONTENT, 'email')
 
 # easy_thumbnail debugging
 # Gjør at man får en feilmelding dersom thumbnail-taggen ikke klarer å lage ny
