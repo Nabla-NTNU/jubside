@@ -134,7 +134,11 @@
 </table>
 
 
-
+{% if has_paid %}
+    <a target="_blank" href="{% url 'ticket' event.id %}{{ ticket_url_end }}" class="btn btn-block btn-success">
+        Din billett
+    </a>
+{% endif %}
 
 
 {% if event.registration_required %}

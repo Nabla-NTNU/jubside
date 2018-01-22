@@ -1,9 +1,11 @@
 from django.db import models
 from django.conf import settings
 from django.template import loader
+from django.core.mail import EmailMultiAlternatives
+import uuid
+
 
 from .managers import RelatedEventRegistrationManager, EventRegistrationManager
-
 
 class EventRegistration(models.Model):
     """Modell for påmelding på arrangementer.
@@ -36,6 +38,40 @@ class EventRegistration(models.Model):
         blank=False,
         null=False,
         help_text="Hvis denne er satt til sann har man en plass på arrangementet ellers er det en ventelisteplass.")
+    has_paid = models.BooleanField(
+        verbose_name='Har betalt',
+        default=False,
+        blank=False,
+        null=False,
+        help_text="Hvis sann har den påmeldte betalt for billett."
+    )
+    ticket_id = models.UUIDField(
+        verbose_name="unik billett id",
+        unique=True,
+        default=uuid.uuid4,
+        editable=False,
+        help_text="Unik id som ingen kan gjette seg til.."
+    )
+    has_received_ticket = models.BooleanField(
+        verbose_name="Har mottatt billett",
+        default=False,
+        help_text="Om billetten har blitt tilsendt brukeren på epost",
+        blank=False,
+        null=False,
+    )
+    checked_in = models.BooleanField(
+        verbose_name="Sjekket inn",
+        default=False,
+        help_text="Om personen har sjekket inn på arrangementet.",
+        blank=False,
+        null=False
+    )
+    check_in_time = models.DateTimeField(
+        verbose_name="Innsjekkstidspunkt",
+        blank=True,
+        null=True,
+        help_text="Hvis sjekket inn: tidspunkt for innsjekk."
+    )
 
     class Meta:
         verbose_name = 'påmelding'
@@ -86,3 +122,18 @@ class EventRegistration(models.Model):
             message = template.render({'event': self.event, 'name': self.user.get_full_name()})
             self.user.email_user(subject, message)
 
+    def set_has_paid(self):
+        self.has_paid = True
+        self.save()
+
+    def send_ticket(self):
+        if self.user.email:
+            subject = 'Billett til %s - Nablas 75-årsjubileum' % self.event.headline
+            template = loader.get_template("events/ticket_email.html")
+            c = {'event': self.event, 'name': self.user.get_full_name(), 'ticket_id': self.ticket_id}
+            message = template.render(c)
+            email = EmailMultiAlternatives(subject,
+                      message,
+                      'noreply@nabla.no',
+                      [self.user.email])
+            email.send(fail_silently=False)

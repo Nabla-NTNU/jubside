@@ -179,3 +179,22 @@ class Event(AbstractEvent, WithEventPicture, WithFrontPagePicture):
 
     def get_absolute_url(self):
         return reverse("event_detail", kwargs={'pk': self.pk, 'slug': self.slug})
+
+    def set_paid_user(self, user):
+        reg = self.eventregistration_set.get(user=user)
+        reg.set_has_paid()
+
+    def has_paid(self, user):
+        return self.eventregistration_set.filter(user=user, has_paid=True).exists()
+
+    def get_place(self, user):
+        if self.eventregistration_set.filter(user=user).exists():
+            return self.eventregistration_set.get(user=user).number
+        else:
+            return False
+
+    def send_ticket(self, user):
+        reg = self.eventregistration_set.get(user=user)
+        reg.send_ticket()
+        reg.has_received_ticket = True
+        reg.save()

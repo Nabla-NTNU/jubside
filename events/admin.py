@@ -4,7 +4,9 @@ from image_cropping import ImageCroppingMixin
 from .forms import EventForm
 from .models import Event, EventRegistration
 
-admin.site.register(EventRegistration)
+@admin.register(EventRegistration)
+class EventRegistrationAdmin(admin.ModelAdmin):
+    readonly_fields=('ticket_id',)
 
 
 class ChangedByMixin(object):
@@ -50,3 +52,5 @@ class EventAdmin(ImageCroppingMixin, ChangedByMixin, admin.ModelAdmin):
     search_fields = ['headline', 'body']
     list_filter = ['event_start', 'organizer', 'location']
     actions_on_top = True
+
+

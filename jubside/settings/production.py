@@ -77,11 +77,10 @@ INSTALLED_APPS = [
     'django_markdown',
     'markdown',
     'sekizai',
+    'qr_code'
 ]
 
 AUTH_USER_MODEL = 'user.User'
-
-SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
