@@ -35,17 +35,18 @@ $(document).ready(function() {
     <textarea>{% for email in event.users_attending_emails %}{{ email }}; {% endfor %}</textarea>
 </p>
 
-<div class="bg-warning">OBS! Vær sikker på at du velger riktig handling. Det er ikke sikkert at det du gjør er reversibelt.</div>
 
 <form action="" method="post" class="form">{% csrf_token %}
     <div class="form-inline">
+        Fritekst: <input class="form-control" type="text" name="text" size="40" maxlength="100" />
+        <br>
+        <div class="bg-warning">OBS! Vær sikker på at du velger riktig handling. Det er ikke sikkert at det du gjør er reversibelt.</div>
         <select name="action" class="form-control">
             {% for int_name, ext_name in actions %}
                 <option value="{{ int_name }}">{{ ext_name }}</option>
             {% endfor %}
         </select>
-        <input class="form-control" type="text" name="text" size="40" maxlength="100" />
-        <div id="confirm-inital" class="form-control">Utfør</div>
+        <div id="confirm-inital" class="btn form-control">Utfør</div>
         <input id="confirm-final" class="form-control" type="submit" name="commit_changes" value="Er du sikker?">
         <script>
             $("#confirm-final").hide();
@@ -54,7 +55,6 @@ $(document).ready(function() {
                 $("#confirm-final").slideDown();
             });
         </script>
-
     </div>
 
     <br>
