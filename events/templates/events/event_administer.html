@@ -69,6 +69,7 @@ $(document).ready(function() {
                     <th>Navn</th>
                     <th>Email</th>
                     <th>Har betalt</th>
+                    <th>Mottatt billett</th>
                     <th>Velg</th>
                 </tr>
             </thead>
@@ -81,6 +82,7 @@ $(document).ready(function() {
                         <td>{{ reg.user.get_full_name }}</td>
                         <td>{{ reg.user.email }}</td>
                         <td>{{ reg.has_paid|yesno:"X, " }}</td>
+                        <td>{{ reg.has_received_ticket|yesno:"X, " }}</td>
                         <td><input class="checkbox1" type="checkbox" name="user" value="{{ reg.user.username }}" /></td>
                     </tr>
                 {% endfor %}
@@ -93,6 +95,7 @@ $(document).ready(function() {
                         <td>{{ reg.user.get_full_name }}</td>
                         <td>{{ reg.user.email }}</td>
                         <td>{{ reg.has_paid|yesno:"X, " }}</td>
+                        <td>{{ reg.has_received_ticket|yesno:"X, " }}</td>
                         <td><input type="checkbox" name="user" value="{{ reg.user.username }}" /></td>
                     </tr>
                 {% endfor %}
