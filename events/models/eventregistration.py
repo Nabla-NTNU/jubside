@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.template import loader
+from django.core.mail import EmailMultiAlternatives
 import uuid
 
 
@@ -50,6 +51,13 @@ class EventRegistration(models.Model):
         default=uuid.uuid4,
         editable=False,
         help_text="Unik id som ingen kan gjette seg til.."
+    )
+    has_received_ticket = models.BooleanField(
+        verbose_name="Har mottatt billett",
+        default=False,
+        help_text="Om billetten har blitt tilsendt brukeren på epost",
+        blank=False,
+        null=False,
     )
     checked_in = models.BooleanField(
         verbose_name="Sjekket inn",
@@ -117,3 +125,15 @@ class EventRegistration(models.Model):
     def set_has_paid(self):
         self.has_paid = True
         self.save()
+
+    def send_ticket(self):
+        if self.user.email:
+            subject = 'Billett til %s' % self.event.headline
+            template = loader.get_template("events/ticket_email.html")
+            c = {'event': self.event, 'name': self.user.get_full_name(), 'ticket_id': self.ticket_id}
+            message = template.render(c)
+            email = EmailMultiAlternatives(subject,
+                      message,
+                      'noreply@nabla.no',
+                      [self.user.email])
+            email.send(fail_silently=False)

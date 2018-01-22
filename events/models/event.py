@@ -189,3 +189,9 @@ class Event(AbstractEvent, WithEventPicture, WithFrontPagePicture):
 
     def get_place(self, user):
         return self.eventregistration_set.get(user=user).number
+
+    def send_ticket(self, user):
+        reg = self.eventregistration_set.get(user=user)
+        reg.send_ticket()
+        reg.has_received_ticket = True
+        reg.save()
