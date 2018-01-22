@@ -1,3 +1,4 @@
+from uuid import UUID
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
@@ -76,10 +77,18 @@ class TicketCheckView(PermissionRequiredMixin,
 
     def post(self, request, pk):
         """Sjekker inn brukeren i POST['text'] hvis id-en tilhører en bruker som har betalt."""
-        ticket_id = request.POST.get('text')
+        text = request.POST.get('text')
+        try:
+            ticket_id = UUID(text, version=4)
+        except ValueError:
+            return HttpResponseRedirect(reverse("check_in", kwargs={'pk': pk}))
+
         try:
             event = self.get_object()
-            reg = EventRegistration.objects.get(event=event, ticket_id=ticket_id)
+            try:
+                reg = EventRegistration.objects.get(event=event, ticket_id=ticket_id)
+            except EventRegistration.DoesNotExist:
+                return HttpResponseRedirect(reverse("check_in", kwargs={'pk': pk}))
             copy = False
             if not reg.checked_in:
                 reg.checked_in = True
@@ -98,18 +107,21 @@ class TicketCheckView(PermissionRequiredMixin,
         event = self.object
         number = self.request.GET.get('num')
         copy = self.request.GET.get('copy')
-        if not number: number = 1
-        reg = EventRegistration.objects.get(event=event, number=number)
-        context.update({'first_name': reg.user.first_name,
-                   'last_name': reg.user.last_name,
-                   'email': reg.user.email,
-                   'allergies': reg.user.allergies,
-                   'starting_year': reg.user.starting_year,
-                   'has_paid': reg.has_paid,
-                   'checked_in': reg.checked_in,
-                   'check_in_time': reg.check_in_time,
-                   'number': number,
-                   'copy': copy})
+        if not number:
+            context.update({'is_ticket': False})
+        else:
+            reg = EventRegistration.objects.get(event=event, number=number)
+            context.update({'first_name': reg.user.first_name,
+                       'last_name': reg.user.last_name,
+                       'email': reg.user.email,
+                       'allergies': reg.user.allergies,
+                       'starting_year': reg.user.starting_year,
+                       'has_paid': reg.has_paid,
+                       'checked_in': reg.checked_in,
+                       'check_in_time': reg.check_in_time,
+                       'number': number,
+                       'copy': copy,
+                       'is_ticket': True})
         return context
 
 
@@ -120,7 +132,9 @@ class AdministerRegistrationsView(StaticContextMixin,
     model = Event
     template_name = "events/event_administer.html"
     permission_required = 'events.administer'
-    actions = {"pay": ("Bekreft betaling", "set_paid_user"),
+    actions = {"pay_mail": ("Bekreft betaling og send billett", "pay_ticket"),
+               "mail": ("Send billett via mail", "send_ticket"),
+               "pay": ("Bekreft betaling", "set_paid_user"),
                "add": ("Legg til deltager", "register_user"),
                "del": ("Fjern deltager", "deregister_users")
                }
@@ -150,6 +164,7 @@ class AdministerRegistrationsView(StaticContextMixin,
                 self.get_object().deregister_user(user)
             except (User.DoesNotExist, UserRegistrationException):
                 pass
+
     def set_paid_user(self):
         user_list = self.request.POST.getlist('user')
         for username in user_list:
@@ -158,6 +173,20 @@ class AdministerRegistrationsView(StaticContextMixin,
                 self.get_object().set_paid_user(user)
             except (User.DoesNotExist, UserRegistrationException):
                 pass
+
+    def send_ticket(self):
+        user_list = self.request.POST.getlist('user')
+        for username in user_list:
+            try:
+                user = User.objects.get(username=username)
+                self.get_object().send_ticket(user)
+            except (User.DoesNotExist, UserRegistrationException):
+                pass
+
+    def pay_ticket(self):
+        self.set_paid_user()
+        self.send_ticket()
+
 
 def calendar(request, year=None, month=None):
     """
