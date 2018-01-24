@@ -141,7 +141,6 @@ class EventRegistration(models.Model):
                       [self.user.email])
             img = qrcode.make(self.ticket_id, image_factory=PilImage)
             stream = BytesIO()
-            img.save(stream, kind="PNG")
+            img.save(stream, format="PNG")
             email.attach(filename=(str(self.event.headline) + "-billett-Nablas-75aarsjubileum.png"), content=str(b64encode(stream.getvalue()), encoding='ascii'), mimetype='image/png', )
             email.send(fail_silently=False)
-            
