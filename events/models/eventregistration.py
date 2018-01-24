@@ -1,12 +1,12 @@
 from io import BytesIO
 import uuid
-
+from base64 import b64encode
 from django.db import models
 from django.conf import settings
 from django.template import loader
 from django.core.mail import EmailMultiAlternatives
 import qrcode
-from qrcode.image.svg import SvgFillImage
+from qrcode.image.pil import PilImage
 
 from .managers import RelatedEventRegistrationManager, EventRegistrationManager
 
@@ -139,8 +139,9 @@ class EventRegistration(models.Model):
                       message,
                       'noreply@nabla.no',
                       [self.user.email])
-            img = qrcode.make(self.ticket_id, image_factory=SvgFillImage)
+            img = qrcode.make(self.ticket_id, image_factory=PilImage)
             stream = BytesIO()
-            img.save(stream, kind="SVG")
-            email.attach(filename=("nabla." + str(self.event.headline) + "-billett.svg"), content=str(stream.getvalue(), encoding='utf-8'), mimetype='image/svg+xml', )
+            img.save(stream, kind="PNG")
+            email.attach(filename=(str(self.event.headline) + "-billett-Nablas-75aarsjubileum.png"), content=str(b64encode(stream.getvalue()), encoding='ascii'), mimetype='image/png', )
             email.send(fail_silently=False)
+            
