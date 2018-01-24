@@ -128,7 +128,10 @@ CACHES = {
 }
 
 # All epost blir åpnet i nettleseren og lagret som en html-fil, istedet for å sendes ut til brukerne.
-EMAIL_BACKEND = "naomi.mail.backends.naomi.NaomiBackend"
+# EMAIL_BACKEND = "naomi.mail.backends.naomi.NaomiBackend"
+
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(VARIABLE_CONTENT, 'email')
 
 # easy_thumbnail debugging

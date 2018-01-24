@@ -1,9 +1,12 @@
+from io import BytesIO
+import uuid
+
 from django.db import models
 from django.conf import settings
 from django.template import loader
 from django.core.mail import EmailMultiAlternatives
-import uuid
-
+import qrcode
+from qrcode.image.svg import SvgFillImage
 
 from .managers import RelatedEventRegistrationManager, EventRegistrationManager
 
@@ -129,11 +132,15 @@ class EventRegistration(models.Model):
     def send_ticket(self):
         if self.user.email:
             subject = 'Billett til %s - Nablas 75-årsjubileum' % self.event.headline
-            template = loader.get_template("events/ticket_email.html")
-            c = {'event': self.event, 'name': self.user.get_full_name(), 'ticket_id': self.ticket_id}
+            template = loader.get_template("events/event_ticket_email.txt")
+            c = {'event': self.event, 'name': self.user.get_full_name()}
             message = template.render(c)
             email = EmailMultiAlternatives(subject,
                       message,
                       'noreply@nabla.no',
                       [self.user.email])
+            img = qrcode.make(self.ticket_id, image_factory=SvgFillImage)
+            stream = BytesIO()
+            img.save(stream, kind="SVG")
+            email.attach(filename=("nabla." + str(self.event.headline) + "-billett.svg"), content=str(stream.getvalue(), encoding='utf-8'), mimetype='image/svg+xml', )
             email.send(fail_silently=False)
