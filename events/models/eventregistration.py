@@ -5,7 +5,7 @@ from django.db import models
 from django.conf import settings
 from django.template import loader
 from django.core.mail import EmailMultiAlternatives
-import qrcode
+from qrcode import make
 from qrcode.image.pil import PilImage
 
 from .managers import RelatedEventRegistrationManager, EventRegistrationManager
@@ -139,8 +139,9 @@ class EventRegistration(models.Model):
                       message,
                       'noreply@nabla.no',
                       [self.user.email])
-            img = qrcode.make(self.ticket_id, image_factory=PilImage)
+            img = make(self.ticket_id, image_factory=PilImage)
             stream = BytesIO()
             img.save(stream, format="PNG")
-            email.attach(filename=(str(self.event.headline) + "-billett-Nablas-75aarsjubileum.png"), content=str(b64encode(stream.getvalue()), encoding='ascii'), mimetype='image/png', )
+            email.attach(filename=(str(self.event.headline.replace(' ', '-')) + "-billett-Nablas-75aarsjubileum.png"),
+                         content=str(stream.getvalue()), mimetype='image/png')
             email.send(fail_silently=False)
