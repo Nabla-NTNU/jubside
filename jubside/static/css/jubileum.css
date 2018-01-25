@@ -279,10 +279,15 @@ main {
 
 footer {
 	min-height: 5em;
-	display: flex;
-	flex-direction: row;
 	background-color: var(--bar-color);
     word-wrap: break-word;
+}
+
+footer > #footer-content {
+	width: 1000px;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
 }
 #about, #socmed-links, #feedback { padding: 1em; flex: 1; word-wrap: break-word}
 h3, #socmed-links ul { margin: 0; padding: 0; }
