@@ -1,5 +1,7 @@
+from struct import *
 from io import BytesIO
 import uuid
+import base64
 from email.mime.image import MIMEImage
 from django.db import models
 from django.conf import settings
@@ -141,7 +143,8 @@ class EventRegistration(models.Model):
             img = make(self.ticket_id)
             imagefile = BytesIO()
             img.save(imagefile, format='PNG')
-            image = MIMEImage(imagefile.read(), _subtype='image/png')
+            image = MIMEImage(imagefile.read(), _subtype='image/png', name="billett.png")
             image.add_header('Content-ID', '<{}>'.format(str(self.event.headline.replace(' ', '-')) + "-billett-Nablas-75aarsjubileum.png"))
-            email.attach(image)
+            email.attach(filename=(str(self.event.headline.replace(' ', '-')) + "-billett-Nablas-75aarsjubileum.png"),
+                         content=base64.b64decode(imagefile.getvalue()), mimetype='image/png')
             email.send(fail_silently=False)
