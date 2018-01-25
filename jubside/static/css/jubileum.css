@@ -284,11 +284,16 @@ footer {
 }
 
 footer > #footer-content {
-	width: 1000px;
 	margin: auto;
 	display: flex;
 	flex-direction: row;
 }
+
+@media (min-width: 1000px) {
+    footer > #footer-content {width: 1000px;}
+}
+
+
 #about, #socmed-links, #feedback { padding: 1em; flex: 1; word-wrap: break-word}
 h3, #socmed-links ul { margin: 0; padding: 0; }
 #feedback ul { margin-left: -1em; padding 0; }
