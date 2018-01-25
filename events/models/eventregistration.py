@@ -141,10 +141,8 @@ class EventRegistration(models.Model):
                       'noreply@nabla.no',
                       [self.user.email])
             img = make(self.ticket_id)
-            imagefile = BytesIO()
-            img.save(imagefile, format='PNG')
-            image = MIMEImage(imagefile.read(), _subtype='image/png', name="billett.png")
-            image.add_header('Content-ID', '<{}>'.format(str(self.event.headline.replace(' ', '-')) + "-billett-Nablas-75aarsjubileum.png"))
+            stream = BytesIO()
+            img.save(stream, format='png')
             email.attach(filename=(str(self.event.headline.replace(' ', '-')) + "-billett-Nablas-75aarsjubileum.png"),
-                         content=base64.b64decode(imagefile.getvalue()), mimetype='image/png')
+                         content=stream.getbuffer(), mimetype='image/png')
             email.send(fail_silently=False)
