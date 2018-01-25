@@ -1,12 +1,11 @@
 from io import BytesIO
 import uuid
-from base64 import b64encode
+from email.mime.image import MIMEImage
 from django.db import models
 from django.conf import settings
 from django.template import loader
 from django.core.mail import EmailMultiAlternatives
 from qrcode import make
-from qrcode.image.pil import PilImage
 
 from .managers import RelatedEventRegistrationManager, EventRegistrationManager
 
@@ -139,9 +138,10 @@ class EventRegistration(models.Model):
                       message,
                       'noreply@nabla.no',
                       [self.user.email])
-            img = make(self.ticket_id, image_factory=PilImage)
-            stream = BytesIO()
-            img.save(stream, format="PNG")
-            email.attach(filename=(str(self.event.headline.replace(' ', '-')) + "-billett-Nablas-75aarsjubileum.png"),
-                         content=str(stream.getvalue()), mimetype='image/png')
+            img = make(self.ticket_id)
+            imagefile = BytesIO()
+            img.save(imagefile, format='PNG')
+            image = MIMEImage(imagefile.read(), _subtype='image/png')
+            image.add_header('Content-ID', '<{}>'.format(str(self.event.headline.replace(' ', '-')) + "-billett-Nablas-75aarsjubileum.png"))
+            email.attach(image)
             email.send(fail_silently=False)
