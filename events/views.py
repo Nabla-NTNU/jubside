@@ -1,3 +1,4 @@
+import re
 from uuid import UUID
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
@@ -148,12 +149,14 @@ class AdministerRegistrationsView(StaticContextMixin,
 
     def register_user(self):
         """Melder på brukeren nevnt i POST['text'] på arrangementet."""
-        username = self.request.POST.get('text')
-        try:
-            user = User.objects.get(username=username)
-            self.get_object().add_to_attending_or_waiting_list(user)
-        except (User.DoesNotExist, UserRegistrationException):
-            pass
+        text = self.request.POST.get('text')
+        m = re.findall('([^\s]+)', text, re.IGNORECASE)
+        for username in m:
+            try:
+                user = User.objects.get(username=username)
+                self.get_object().add_to_attending_or_waiting_list(user)
+            except (User.DoesNotExist, UserRegistrationException):
+                pass
 
     def deregister_users(self):
         """Melder av brukerne nevnt i POST['user']."""
