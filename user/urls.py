@@ -31,5 +31,8 @@ urlpatterns = [
     url(r'^min-profil/arrangementer/$', views.events, name='user.events'),
     # bruker - administrasjonsrelatert
     url(r'^min-profil/brukere/$', views.registerapplicants, name='user.registerapplicants'),
-    url(r'^min-profil/brukere/(?P<action>accept|undecided|decline|delete)/(?P<userid>[0-9]+)/', views.changeapplicants, name='user.changeapplicants')
+    url(r'^min-profil/brukere/(?P<action>accept|undecided|decline|delete)/(?P<userid>[0-9]+)/', views.changeapplicants, name='user.changeapplicants'),
+    url(r'brukerseed/',
+        views.InjectUsersFormView.as_view(),
+        name='users_inject')
 ]

@@ -1,7 +1,10 @@
+import re
+from braces.views import (FormMessagesMixin, LoginRequiredMixin, PermissionRequiredMixin)
+from django.http import HttpResponseForbidden
+from django.views.generic import FormView
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.utils.http import is_safe_url
-from .forms import RegistrationForm, UpdateUserForm
+from .forms import RegistrationForm, UpdateUserForm, InjectUsersForm
 from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mail
 from . models import User
@@ -250,3 +253,39 @@ def changeapplicants(request, action, userid):
             raise PermissionDenied
     else:
         raise PermissionDenied
+
+
+class InjectUsersFormView(LoginRequiredMixin, PermissionRequiredMixin, FormMessagesMixin, FormView):
+
+    permission_required = "user.add_user"
+
+    form_class = InjectUsersForm
+    form_valid_message = "Brukerne er lagt i databasen."
+    form_invalid_message = "Ikke riktig utfyllt."
+    template_name = 'form.html'
+    success_url = "/"
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.has_module_perms("django.contrib.auth"):
+            return super(InjectUsersFormView, self).dispatch(request, *args, **kwargs)
+        return HttpResponseForbidden()
+
+    def form_valid(self, form):
+        data = form.cleaned_data['data']
+        extract_usernames(data)
+        return super(InjectUsersFormView, self).form_valid(form)
+
+def extract_usernames(string):
+    from .models import User
+
+    m = re.findall('([^\s]+)', string, re.IGNORECASE)
+    for u in m:
+        new_user, was_created = User.objects.get_or_create(email=u)
+        if not was_created:
+            continue
+        new_user.username = u
+        new_user.first_name = "Gjestebruker"
+        new_user.last_name = str(new_user.id)
+        new_user.starting_year = "0000"
+        new_user.is_awaiting_approval = False
+        new_user.save()

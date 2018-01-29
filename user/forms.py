@@ -35,3 +35,10 @@ class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'starting_year', 'allergies']
+
+class InjectUsersForm(forms.Form):
+    title = "Legg til brukere med følgende emailadresser i databasen."
+    data = forms.CharField(
+        widget=forms.Textarea,
+        label="Data"
+    )
