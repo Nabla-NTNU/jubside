@@ -164,7 +164,7 @@ class AdministerRegistrationsView(StaticContextMixin,
         for username in user_list:
             try:
                 user = User.objects.get(username=username)
-                self.get_object().deregister_user(user)
+                self.get_object().force_deregister_user(user)
             except (User.DoesNotExist, UserRegistrationException):
                 pass
 

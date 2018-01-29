@@ -157,9 +157,12 @@ class Event(AbstractEvent, WithEventPicture, WithFrontPagePicture):
 
     def deregister_user(self, user):
         """Melder brukeren av arrangementet."""
-        regs = self.eventregistration_set
         if self.deregistration_closed():
             raise DeregistrationClosed(event=self, user=user)
+        self.force_deregister_user(user)
+
+    def force_deregister_user(self, user):
+        regs = self.eventregistration_set
         try:
             reg = regs.get(user=user)
             reg.delete()
