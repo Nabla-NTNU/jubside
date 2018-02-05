@@ -184,3 +184,28 @@ USE_I18N = True
 
 USE_TZ = False
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'timestamp': {
+            'format': '%(asctime)s %(message)s',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': get_env('DJANGO_LOG_PATH', os.path.join(VARIABLE_CONTENT, 'error.log')),
+            'formatter': 'timestamp',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
