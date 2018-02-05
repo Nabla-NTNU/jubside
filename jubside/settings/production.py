@@ -21,32 +21,6 @@ get_env = os.environ.get
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'timestamp': {
-            'format': '%(asctime)s %(message)s',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': get_env('DJANGO_LOG_PATH', '/var/log/django/jubside/error.log'),
-            'formatter': 'timestamp',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    },
-}
-
-
 SITE_ID = 1
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "jubileum.nabla.no"]
 
