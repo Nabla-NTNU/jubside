@@ -24,6 +24,12 @@ class EventInfoMixin(models.Model):
         verbose_name="sted",
         max_length=100,
         blank=False)
+    hidden_to_guests = models.BooleanField(
+        verbose_name='Skjult for gjester',
+        default=False,
+        blank=False,
+        null=False,
+		help_text="Hvis arrangementet av en eller annen grunn ikke skal være synlig for offentligheten, men bare for innloggede brukere.")
     event_start = models.DateTimeField(
         verbose_name="start",
         null=True,

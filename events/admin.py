@@ -23,6 +23,7 @@ class ChangedByMixin(object):
 class EventAdmin(ImageCroppingMixin, ChangedByMixin, admin.ModelAdmin):
     fields = ("publication_date",
               "published",
+		      "hidden_to_guests",
               "event_picture",
               "event_cropping",
               "front_picture",
@@ -52,5 +53,3 @@ class EventAdmin(ImageCroppingMixin, ChangedByMixin, admin.ModelAdmin):
     search_fields = ['headline', 'body']
     list_filter = ['event_start', 'organizer', 'location']
     actions_on_top = True
-
-
