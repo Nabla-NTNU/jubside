@@ -26,15 +26,13 @@
     <div class="registrations">
         {% for registration in event.eventregistration_set.all %}
         {% with user=registration.user %}
-        {% if not registration.waiting %}
-        <span class="label label-default" style="display: inline-block;">
+        <span class="label {% if not registration.waiting %} label-success {% else %} label-warning {% endif %}" style="display: inline-block;">
             {% if user.get_full_name %}
                 {{ user.get_full_name }}
             {% else %}
                 {{ user.username }}
             {% endif %}
         </span>
-        {% endif %}
         {% endwith %}
         {% endfor %}
     </div>
