@@ -17,18 +17,20 @@
 
     {% for event in event_list %}
         {% if event.published %}
-        <a href={{ event.get_absolute_url }}>
-        <article>
-            {% if event.front_picture %}
-            <img alt="header" src="{% thumbnail event.front_picture 250x250 box=event.front_cropping upscale=False detail=True quality=95 %}">
-            {% endif %}
-            <div class="article-title text-block">
-                <h4 class="col2">{{ event.headline }}</h4>
-                <h4 class="col4">{{ event.event_start|date:"j. N"}}</h4>
-                <h4 class="col1">{{ event.location }}</h4>
-            </div>
-        </article>
-        </a>
+					{% if not event.hidden_to_guests or user.is_authenticated %}
+	        <a href={{ event.get_absolute_url }}>
+	        <article>
+	            {% if event.front_picture %}
+	            <img alt="header" src="{% thumbnail event.front_picture 250x250 box=event.front_cropping upscale=False detail=True quality=95 %}">
+	            {% endif %}
+	            <div class="article-title text-block">
+	                <h4 class="col2">{{ event.headline }}</h4>
+	                <h4 class="col4">{{ event.event_start|date:"j. N"}}</h4>
+	                <h4 class="col1">{{ event.location }}</h4>
+	            </div>
+	        </article>
+	        </a>
+					{% endif %}
         {% endif %}
     {% endfor %}
 

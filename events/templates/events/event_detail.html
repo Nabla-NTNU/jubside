@@ -6,7 +6,7 @@
 
 {% block content %}
 
-
+{% if not event.hidden_to_guests or user.is_authenticated %}
 <div class="box">
     {% if event.event_picture %}
     <img alt="header" class="shadow img-responsive"
@@ -17,6 +17,8 @@
     <p><strong>{{ event.lead_paragraph}}</strong></p>
     <div style="overflow: hidden;">{{ event.body|markdown}}</div>
 </div>
+{% endif %}
+
 
 {# Vis påmeldte #}
 {% if user.is_authenticated %}
@@ -58,7 +60,7 @@
         </div>
    {% endif %}
 {% endif %}
-    
+
 {% endblock %}
 
 
