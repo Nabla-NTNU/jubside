@@ -95,6 +95,7 @@
                     {% if event.registration_open %}
                         <input type="submit"
                            class="btn btn-primary"
+                           style="background-color: {% if event.has_queue and event.is_full %} #6c5b7b {% else %} #355c7d {% endif %}"
                            value="Meld deg på {% if event.has_queue and event.is_full %}ventelisten{% endif %}">
                     {% else %}
                         Påmeldingen er stengt.
@@ -109,13 +110,15 @@
                 {% else %}
                     <a href="#"
                        id="meld-av"
-                       class="btn btn-primary">Meld deg av
+                       class="btn btn-default"
+                       style="background-color: {% if is_waiting %} #6c5b7b {% else %} #355c7d {% endif %}"
+">Meld deg av
                         {% if is_waiting %}ventelisten{% endif %}
                     </a>
                     <br>
                     <input type="submit"
                            id="meld-av-confirm"
-                           class="btn btn-primary btn-warning"
+                           class="btn btn-danger"
                            value="Er du sikker?"
                             >
                     <script>
