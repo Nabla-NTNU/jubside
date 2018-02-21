@@ -98,6 +98,7 @@ $(document).ready(function() {
                         <td>{{ reg.user.email }}</td>
                         <td>{{ reg.has_paid|yesno:"X, " }}</td>
                         <td>{{ reg.has_received_ticket|yesno:"X, " }}</td>
+                        <td>{{ reg.checked_in|yesno:"X, " }}</td>
                         <td><input type="checkbox" name="user" value="{{ reg.user.username }}" /></td>
                     </tr>
                 {% endfor %}
