@@ -4,6 +4,7 @@
 {% block head %}
     <link rel="stylesheet" href={% static "countdown/css/googlefont.css" %} />
     <link rel="stylesheet" href={% static "countdown/countdown/jquery.countdown.css" %} />
+    <link rel="stylesheet" href={% static "css/fireworks.css" %} />
 {% endblock %}
 {% block content %}
 
@@ -33,7 +34,6 @@
 					{% endif %}
         {% endif %}
     {% endfor %}
-
 <!--
 	<article>
 		<img src="bpx.png" alt="kommer">
@@ -43,5 +43,7 @@
 	</article>
 -->
 </section>
+<canvas id="fireworks"></canvas>
+<script src={% static "js/fireworks.js" %}></script>
 
 {% endblock %}

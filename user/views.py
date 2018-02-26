@@ -157,8 +157,8 @@ def settings(request):
 # Lists all events you have signed up on
 def events(request):
     if request.user.is_authenticated:
-        attending_events = EventRegistration.objects.all().filter(user=request.user, attending=True)
-        on_waiting_list = EventRegistration.objects.all().filter(user=request.user, attending=False)
+        attending_events = EventRegistration.objects.all().filter(user=request.user, attending=True).order_by('event__event_start')
+        on_waiting_list = EventRegistration.objects.all().filter(user=request.user, attending=False).order_by('event__event_start')
         return render(request, 'user_events.html', {'attending_events': attending_events, 'on_waiting_list': on_waiting_list})
     else:
         raise PermissionDenied

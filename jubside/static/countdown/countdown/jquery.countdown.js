@@ -33,10 +33,14 @@
 			// Time left
 			left = Math.floor((options.timestamp - (new Date())) / 1000);
 			
-			if(left < 0){
+			if(left < 0) {
 				left = 0;
 			}
-			
+
+			if(left == 0) {
+				document.getElementById('fireworks').style.display = "inline-block";
+                document.getElementById('countdown').innerHTML = "<h1><b>Nabla 75-år!</b></h1>"
+			}
 			// Number of days left
 			d = Math.floor(left / days);
 			updateDuo(0, 1, d);
