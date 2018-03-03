@@ -39,7 +39,7 @@
 
 			if(left == 0) {
 				document.getElementById('fireworks').style.display = "inline-block";
-                document.getElementById('countdown').innerHTML = "<h1><b>Nabla 75-år!</b></h1>"
+                document.getElementById('countdown').innerHTML = "<h1><b>Nabla 75 år!</b></h1>"
 			}
 			// Number of days left
 			d = Math.floor(left / days);
