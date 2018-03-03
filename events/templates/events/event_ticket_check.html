@@ -2,11 +2,10 @@
 
 {% block content %}
 
-{% if is_ticket == True %}
+<h1>Check-in for arrangement: {{ event_name }}</h1>
 <div>
   Totalt antall sjekket inn: {{ total_checked_in }} av {{ total_registrations }}
 </div>
-{% endif %}
 
 <form action="" method="post" class="form">{% csrf_token %}
     <div class="form-inline">
