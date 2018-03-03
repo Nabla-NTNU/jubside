@@ -108,6 +108,8 @@ class TicketCheckView(PermissionRequiredMixin,
         event = self.object
         number = self.request.GET.get('num')
         copy = self.request.GET.get('copy')
+        total_checked_in = EventRegistration.objects.filter(event=event, checked_in = True).count() ## Number of people currently checked in
+        total_registrations = EventRegistration.objects.filter(event=event).count() ## Number of registrations for the event
         if not number:
             context.update({'is_ticket': False})
         else:
@@ -122,7 +124,10 @@ class TicketCheckView(PermissionRequiredMixin,
                        'check_in_time': reg.check_in_time,
                        'number': number,
                        'copy': copy,
-                       'is_ticket': True})
+                       'is_ticket': True,
+                       'total_checked_in': total_checked_in,
+                       'total_registrations': total_registrations},
+            )
         return context
 
 

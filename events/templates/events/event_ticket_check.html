@@ -2,6 +2,12 @@
 
 {% block content %}
 
+{% if is_ticket == True %}
+<div>
+  Totalt antall sjekket inn: {{ total_checked_in }} av {{ total_registrations }}
+</div>
+{% endif %}
+
 <form action="" method="post" class="form">{% csrf_token %}
     <div class="form-inline">
         <input id="ticket" class="form-control" type="text" name="text" size="40" maxlength="100" />
