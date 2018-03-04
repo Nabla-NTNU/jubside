@@ -52,6 +52,12 @@ class TicketView(LoginRequiredMixin,
         context = super().get_context_data(**kwargs)
         event = self.object
         number = self.request.GET.get('number')
+        if not number:
+            number = 1
+        try:
+            user_number = str(EventRegistration.objects.get(event=event, user=self.request.user).number)
+        except EventRegistration.DoesNotExist:
+            user_number = 0
         reg = EventRegistration.objects.get(event=event, number=number)
         context.update({'user': self.request.user,
                         'permission': self.request.user.has_perm('events.administer'),
@@ -65,7 +71,8 @@ class TicketView(LoginRequiredMixin,
                         'checked_in': reg.checked_in,
                         'check_in_time': reg.check_in_time,
                         'number': number,
-                        'user_number': str(EventRegistration.objects.get(event=event, user=self.request.user).number)})
+                        'user_number': user_number})
+
         return context
 
 
