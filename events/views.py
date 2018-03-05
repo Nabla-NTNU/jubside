@@ -8,6 +8,7 @@ from django.views.generic import TemplateView, DetailView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.utils.safestring import mark_safe
+from django.core.exceptions import PermissionDenied
 
 import datetime
 from itertools import chain
@@ -272,10 +273,34 @@ class EventDetailView(AdminLinksMixin, MessageMixin, DetailView):
                 context['is_waiting'] = event.is_waiting(user)
                 context['has_paid'] = event.has_paid(user)
                 context['ticket_url_end'] = "?number=" + str(event.get_place(user))
+                context['ended'] = event.has_finished()
             except EventException as e:
                 self.messages.error(e)
         else:
             context['is_authenticated'] = False
+        return context
+
+class EventSummaryView(DetailView):
+    model = Event
+    context_object_name = "event"
+    template_name = 'events/event_summary.html'
+
+    def get_context_data(self, **kwargs):
+        if not self.request.user.has_perm('events.administer'):
+            raise PermissionDenied
+        
+        event = self.object
+                
+        if not event.has_finished():
+            raise PermissionDenied("Summary kun tilgjengelig etter at arrangementet er avsluttet.")
+        
+        context = super().get_context_data(**kwargs)
+        regs = event.attending_registrations
+
+        too_late = regs.filter(checked_in = True, check_in_time__gte = self.object.event_start + datetime.timedelta(minutes = 10) )
+        
+        context['did_not_attend'] = regs.filter(checked_in = False)
+        context['checked_in_late'] = too_late 
         return context
 
 

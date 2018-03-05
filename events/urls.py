@@ -27,6 +27,10 @@ urlpatterns = [
         EventDetailView.as_view(),
         name='event_detail'),
 
+    url(r'^(?P<pk>\d{1,8})-(?P<slug>[-\w]*)/summary$',
+        EventSummaryView.as_view(),
+        name='event_summary'),
+
     url(r'^reg/(?P<pk>\d{1,8})$',
         EventRegistrationsView.as_view(),
         name='event_registrations'),
