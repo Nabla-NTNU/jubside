@@ -32,7 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ff34xtnmhg8uc3er$=q@y1lk2w^*m^ta7(1qf0diz#hbw62ays'
+SECRET_KEY = get_env("SECRET_KEY")
 
 
 LOGIN_REDIRECT_URL = '/min-profil/'
