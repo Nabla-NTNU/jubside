@@ -5,7 +5,7 @@ django-bootstrap3==9.1.0
 django-image-cropping==1.1.0
 django-sekizai==0.10.0
 django-braces==1.11.0
-git+https://bitbucket.org/webkom/content-app.git@1e451bfd956fcdbfa8df2d5bb834137e2819752a#egg=content
+git+https://github.com/Nabla-NTNU/content-app.git@1e451bfd956fcdbfa8df2d5bb834137e2819752a#egg=content
 gunicorn==19.7.1
 PyMySQL==0.7.11
 django-qr-code==0.3.3
