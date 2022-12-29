@@ -196,7 +196,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': get_env('DJANGO_LOG_PATH', os.path.join(VARIABLE_CONTENT, 'error.log')),
+            'filename': get_env('DJANGO_LOG_PATH', '/var/log/django/jubside/debug.log'),
             'formatter': 'timestamp',
         },
     },
