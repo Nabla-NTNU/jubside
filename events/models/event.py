@@ -15,12 +15,12 @@ class WithEventPicture(models.Model):
         null=True,
         blank=True,
         verbose_name="Arrangementbilde",
-        help_text="Bilder som er større enn 1000x400 px ser best ut. Du kan beskjære bildet etter opplasting."
+        help_text="Bilder som er større enn 800x300 px ser best ut. Du kan beskjære bildet etter opplasting."
     )
 
     event_cropping = ImageRatioField(
         'event_picture',
-        '1000x400',
+        '800x300',
         allow_fullsize=False,
         verbose_name="Beskjæring"
     )
