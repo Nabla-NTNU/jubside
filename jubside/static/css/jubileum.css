@@ -199,11 +199,6 @@ body {
 }
 
 @media only screen and (max-width: 1400px) {
-    #logo {
-	width: 80vw;
-	height: auto;
-    }
-
     #jub {
 	font-size: 3.5vw;
     }
@@ -215,6 +210,21 @@ body {
 
     #clock-text{
 	font-size: 1.5vw;
+    }
+}
+
+@media only screen and (max-width: 502px) {
+    #jub {
+	      font-size: 4vw;
+    }
+
+    #clock{
+	      width: 70%;
+	      font-size: 8vw;
+    }
+
+    #clock-text{
+	      font-size: 2.5vw;
     }
 }
 
@@ -302,10 +312,6 @@ main {
     .jub-content article { width: 80%; margin: auto; }
     .jub-content article .article-block { width: 100%!important; }
     .jub-content article .article-thumbnail{ display: none; }
-    #logo { display: none; }
-    #jub { display: none; }
-    #clock{ display: none; }
-    #clock-text{ display: none; }
     footer > #footer-content { flex-wrap: wrap; }
 }
 
