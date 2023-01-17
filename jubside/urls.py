@@ -23,8 +23,6 @@ from . import views
 
 urlpatterns = [
     # Add prefix to all urls
-    url(r'^$', TemplateView.as_view(template_name='countdown_fullpage.html')),
-    url(r'^dev/', include([
     url(r'^$', views.FrontPageView.as_view(), name='frontpage'),
     url(r'^', include('user.urls')),
     url(r'^admin/', admin.site.urls),
@@ -38,7 +36,6 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     url(r'^', include('django.contrib.flatpages.urls')),
-        ]))
 ]
 
 if settings.DEBUG:
