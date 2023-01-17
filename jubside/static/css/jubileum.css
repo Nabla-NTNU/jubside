@@ -68,6 +68,7 @@ nav div img {
     object-fit: cover;
     max-height: 6rem;
     padding: 3px;
+    background-color: var(--bg-color);
 }
 
 #user-block {
