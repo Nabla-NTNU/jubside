@@ -303,6 +303,7 @@ main {
     width: 50%;
     padding-top: 3px;
     overflow: auto;
+    word-break: keep-all;
 }
 
 .jub-content article .article-title h3 {
@@ -311,7 +312,6 @@ main {
 
 .jub-content article .article-paragraph h4 {
     font-family: RobotoBold;
-    word-break: keep-all;
     text-overflow: ellipdisplay: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
