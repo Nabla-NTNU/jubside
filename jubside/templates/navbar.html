@@ -12,7 +12,7 @@
 <nav id="jub-nav">
 	<div id="site-navigation" aria-label="Menu">
 	    <a href="{{ jubside_frontpage }}" class="col3">
-		    <img src="{% static "img/Logo-icon-jub80.png" %}" alt="80">
+		    <img src="{% static "img/Logo_dark_transparent.png" %}" alt="80">
 	    </a>
 
         <label for="toggle-mobile-menu" aria-label="Menu">&#9776;</label>
@@ -29,15 +29,18 @@
 		</ul>
 		<ul id="user-block">
 			{% if user.is_authenticated %}
-			  <li class="dropdown{% if request.path == user_registerapplicants or request.path == user_profile or request.path == user_settings or request.path == user_change_password or request.path == user_events %} active{% else %}{% endif %}">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hei {{ user.first_name }} <span class="caret"></span></a>
+			  <li class="dropdown{% if request.path == user_registerapplicants or request.path == user_profile or request.path == user_settings or request.path == user_change_password or request.path == user_events %} active{% else %}{% endif %} col4">
+				<a href="#" class="dropdown-toggle col4" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.first_name }} <span class="caret"></span></a>
 				<ul class="dropdown-menu">
 				  <li><a href="{{ user_profile }}">Min profil</a></li>
 				  <li><a href="{{ user_settings }}">Innstillinger</a></li>
 				  <li><a href="{{ user_events }}">Påmeldte arrangementer</a></li>
-				  {% if perms.user.can_view_users %}
-					<li><a href="{{ user_registerapplicants }}">Brukere</a></li>
-				  {% endif %}
+				  <!-- {% if perms.user.can_view_users %}
+					     <li><a href="{{ user_registerapplicants }}">Brukere</a></li>
+				       {% endif %} -->
+          {% if user.is_staff %}
+          <li><a class="dropdown-item" href="{% url "admin:index" %}">Admin</a></li>
+          {% endif %}
 				  <li role="separator" class="divider"></li>
 				  <li><a href="{{ user_logout }}">Logg ut</a></li>
 				</ul>

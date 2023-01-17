@@ -33,6 +33,11 @@ body { padding-top: 0; }
 @media only screen and (min-width: 768px) {
     .dropdown-menu { right: 0; left: auto!important; }
 }
+
+@media (max-width: 768px) {
+    .dropdown-menu li a { white-space: break-spaces; }
+}
+
 .dropdown-menu .divider { padding: 0!important; }
 .dropdown-menu li a:hover { background-color: transparent; }
 
@@ -68,11 +73,17 @@ nav div img {
     object-fit: cover;
     max-height: 6rem;
     padding: 3px;
+    background-color: var(--bg-color);
 }
 
 #user-block {
     font-weight: bold;
     margin: auto;
+    padding: 0;
+}
+
+#user-block a:focus {
+    color: #EAA960;
 }
 
 #site-navigation {
@@ -114,7 +125,7 @@ nav div img {
 @media only screen and (max-width: 767px) { /* min-width rules won't override this otherwise */
     #site-navigation > input:checked + #main-menu {
 	position: absolute;
-	top: 43px; /*40 + 3*/
+	top: 60px; /*40 + 3*/
 	right: 0;
 	display: block;
 	clear: both;
@@ -122,6 +133,7 @@ nav div img {
 	background-color: var(--bar-color);
 	text-align: right;
 	z-index: 1; /* above header image */
+  padding-bottom: 1px;
     }
 }
 
@@ -287,13 +299,14 @@ main {
 
 @media (max-width: 502px) {
     main { width: 98%; }
-    .jub-content article { width: 300px; }
+    .jub-content article { width: 80%; margin: auto; }
     .jub-content article .article-block { width: 100%!important; }
     .jub-content article .article-thumbnail{ display: none; }
     #logo { display: none; }
     #jub { display: none; }
     #clock{ display: none; }
     #clock-text{ display: none; }
+    footer > #footer-content { flex-wrap: wrap; }
 }
 
 .jub-content article .article-block {
@@ -312,9 +325,6 @@ main {
 
 .jub-content article .article-paragraph h4 {
     font-family: RobotoBold;
-    text-overflow: ellipdisplay: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
 }
 
 .jub-content article .article-thumbnail {
@@ -379,6 +389,9 @@ footer > #footer-content {
 @media (min-width: 1000px) {
     footer > #footer-content {width: 1000px;}
 }
+
+footer #feedback a { color: #EAA960; }
+footer #feedback a:hover { color: #961D34; }
 
 
 #about, #socmed-links, #feedback { padding: 1em; flex: 1; word-wrap: break-word}
