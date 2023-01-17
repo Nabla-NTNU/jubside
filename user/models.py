@@ -17,7 +17,7 @@ class User (AbstractUser):
     email = models.CharField(
         max_length=80,
         verbose_name="E-post",
-        unique=True
+        unique=False
     )
 
     allergies = models.CharField(
