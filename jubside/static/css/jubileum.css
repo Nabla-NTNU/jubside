@@ -76,6 +76,10 @@ nav div img {
     margin: auto;
 }
 
+#user-block a:focus {
+    color: #EAA960;
+}
+
 #site-navigation {
     flex: 1;
     display: flex;
@@ -380,6 +384,9 @@ footer > #footer-content {
 @media (min-width: 1000px) {
     footer > #footer-content {width: 1000px;}
 }
+
+footer #feedback a { color: #EAA960; }
+footer #feedback a:hover { color: #961D34; }
 
 
 #about, #socmed-links, #feedback { padding: 1em; flex: 1; word-wrap: break-word}
