@@ -299,6 +299,7 @@ main {
     #jub { display: none; }
     #clock{ display: none; }
     #clock-text{ display: none; }
+    footer > #footer-content { flex-wrap: wrap; }
 }
 
 .jub-content article .article-block {

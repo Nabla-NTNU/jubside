@@ -23,7 +23,7 @@ main, .event-header { padding-top: 0; }
 nav > div, .event-header { border-bottom: 0; }
 
 .event-header img {
-    height: 300px;
+    height: 100%;
 }
 
 .event-header h1 {
@@ -68,9 +68,6 @@ nav > div, .event-header { border-bottom: 0; }
 
 .btn { border-radius: 0!important; border: 0; }
 
-.bunnslam {
-    background-color: #7E304E;
-}
 
 .attending {
     font-family: RobotoBold;
@@ -89,15 +86,13 @@ nav > div, .event-header { border-bottom: 0; }
 }
 
 @media (max-width: 800px) {
+    .event-header { width: 100%; height: auto; }
+    .event-header h1 { font-size: 2em; }
+    .event-header img { width: 100%; }
 }
 
 @media (max-width: 502px) {
-    main { width: 98%; }
-    .jub-content article { width: 300px; }
-    .jub-content article .article-block { width: 100%!important; }
-    .jub-content article .article-thumbnail{ display: none; }
-    #logo { display: none; }
-    #jub { display: none; }
-    #clock{ display: none; }
-    #clock-text{ display: none; }
+    .event-header h1 { font-size: 1.2em; }
+    .event-info { font-size: .8em; }
 }
+
