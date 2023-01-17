@@ -17,9 +17,9 @@
                     <br>
                     <a class="btn btn-primary btn-block" href="{% url 'user.settings' %}"><span class="glyphicon glyphicon-cog"></span> Innstillinger</a>
                     <a class="btn btn-primary btn-block" href="{% url 'user.events' %}"><span class="glyphicon glyphicon-calendar"></span> Påmeldte arrangementer</a>
-                    {% if perms.user.can_view_users %}
-                        <a class="btn btn-success btn-block" href="{% url 'user.registerapplicants' %}"><span class="glyphicon glyphicon-user"></span> Brukere</a>
-                    {% endif %}
+                    <!-- {% if perms.user.can_view_users %}
+                         <a class="btn btn-success btn-block" href="{% url 'user.registerapplicants' %}"><span class="glyphicon glyphicon-user"></span> Brukere</a>
+                         {% endif %} -->
                     {% if perms.user.admin %}
                         <a class="btn btn-success btn-block" href="{% url 'admin:index' %}"><span class="glyphicon glyphicon-cog"></span> Admin</a>
                     {% endif %}

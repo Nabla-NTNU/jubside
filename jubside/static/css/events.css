@@ -68,6 +68,10 @@ nav > div, .event-header { border-bottom: 0; }
 
 .btn { border-radius: 0!important; border: 0; }
 
+.bunnslam {
+    background-color: #7E304E;
+}
+
 .attending {
     font-family: RobotoBold;
     font-size: 1.5em;
