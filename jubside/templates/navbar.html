@@ -43,7 +43,7 @@
 				</ul>
 			  </li>
 			{% else %}
-			<li {% if request.path == user_login or request.path == user_registration or request.path == user_reset %}class="active"{% endif %}><a href="{{ user_login }}" class="col4">Logg inn / Registrer deg</a></li>
+			<li {% if request.path == user_login %}class="active"{% endif %}><a href="{{ user_login }}" class="col4">Logg inn</a></li>
 			{% endif %}
 		</ul>
 	</div>

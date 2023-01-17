@@ -30,10 +30,8 @@
     {% if event.registration_required %}
     <div class="event-data">
         {% include "events/includes/info.html" with event=event %}
-    </div> 
+    </div>
     {% endif %}
-        
-</div>
 {% endif %}
 
 
@@ -80,12 +78,11 @@
 
 {% endblock %}
 
-
 {% block sidebar %}
 <br>
 {% include "events/includes/info.html" with event=event %}
 <br>
-{% include "content/includes/meta.html" with content=event %}
 {% include "events/includes/sidebar-admin.html" %}
-
+{% include "content/includes/meta.html" with content=event %}
 {% endblock %}
+</div>
