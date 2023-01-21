@@ -66,6 +66,11 @@ nav > div, .event-header { border-bottom: 0; }
     padding: 10px;
 }
 
+.event-info .registrations {
+    overflow: hidden;
+}
+
+
 .btn { border-radius: 0!important; border: 0; }
 
 
@@ -94,5 +99,6 @@ nav > div, .event-header { border-bottom: 0; }
 @media (max-width: 502px) {
     .event-header h1 { font-size: 1.2em; }
     .event-info { font-size: .8em; }
+    .event-info .registrations { font-size: 10px; }
 }
 
