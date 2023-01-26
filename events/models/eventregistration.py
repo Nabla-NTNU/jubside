@@ -21,12 +21,14 @@ class EventRegistration(models.Model):
     event = models.ForeignKey(
         'Event',
         blank=False,
-        null=True)
+        null=True,
+        on_delete=models.CASCADE)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name='bruker',
         blank=False,
-        null=True)
+        null=True,
+        on_delete=models.CASCADE)
     date = models.DateTimeField(
         verbose_name="Påmeldingsdato",
         auto_now_add=True,

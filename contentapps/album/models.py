@@ -20,7 +20,8 @@ class AlbumImage(BaseImageModel):
         'album.Album',
         verbose_name="Album",
         related_name="images",
-        null=True
+        null=True,
+        on_delete=models.CASCADE,
     )
 
     num = models.PositiveIntegerField(
