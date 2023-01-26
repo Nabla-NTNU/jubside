@@ -1,4 +1,4 @@
-django==2.0.13
+django==2.1.15
 django-markdown-app==0.9.7
 easy-thumbnails==2.5
 django-bootstrap3==9.1.0
