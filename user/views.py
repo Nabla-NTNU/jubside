@@ -278,7 +278,7 @@ class InjectUsersFormView(LoginRequiredMixin, PermissionRequiredMixin, FormMessa
 def extract_usernames(string):
     from .models import User
 
-    m = re.findall('([^\s]+)', string, re.IGNORECASE)
+    m = re.findall(r'([^\s]+)', string, re.IGNORECASE)
     for u in m:
         new_user, was_created = User.objects.get_or_create(email=u)
         if not was_created:

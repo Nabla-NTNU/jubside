@@ -166,7 +166,7 @@ class AdministerRegistrationsView(StaticContextMixin,
     def register_user(self):
         """Melder på brukeren nevnt i POST['text'] på arrangementet."""
         text = self.request.POST.get('text')
-        m = re.findall('([^\s]+)', text, re.IGNORECASE)
+        m = re.findall(r'([^\s]+)', text, re.IGNORECASE)
         for username in m:
             try:
                 user = User.objects.get(username=username)
