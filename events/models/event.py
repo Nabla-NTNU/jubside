@@ -1,5 +1,5 @@
 import logging
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from django.contrib.sites.models import Site
 from image_cropping.fields import ImageRatioField
