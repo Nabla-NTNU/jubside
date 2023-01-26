@@ -73,7 +73,7 @@ class Album(TimeStamped, ViewCounterMixin, models.Model):
         return reverse('album', kwargs={'pk': self.pk})
 
     def is_visible(self, user=AnonymousUser()):
-        return self.visibility == 'p' or (self.visibility == 'u' and user.is_authenticated())
+        return self.visibility == 'p' or (self.visibility == 'u' and user.is_authenticated)
 
     @property
     def first(self):
