@@ -1,0 +1,42 @@
+name: Python testing
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20]
+        python_version: ["3.6.15"]
+    defaults:
+      run:
+        shell: bash  # For `source`
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python_version }}
+
+    - name: OS specific setup (windows)
+      if: runner.os == 'Windows'
+      run: |
+        echo 'ACTIVATE_PATH=venv/Scripts/activate' >> $GITHUB_ENV
+    - name: OS specific setup (linux/mac)
+      if: runner.os != 'Windows'
+      run: |
+        echo 'ACTIVATE_PATH=venv/bin/activate' >> $GITHUB_ENV
+
+    - name: Install dependencies
+      run: |
+        python -m ensurepip --upgrade
+        python -m venv venv
+        source ${{ env.ACTIVATE_PATH }}
+        python -m pip install -r requirements.txt
+
+    - name: Run tests
+      run: |
+        source ${{ env.ACTIVATE_PATH }}
+        python -Wa manage.py test
