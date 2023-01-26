@@ -1,5 +1,5 @@
-django==1.11.29
-django-markdown-app==0.9.3.1
+django==2.0.13
+django-markdown-app==0.9.7
 easy-thumbnails==2.5
 django-bootstrap3==9.1.0
 django-image-cropping==1.1.0
