@@ -32,11 +32,10 @@ class GetEventGetterTest(TestCase):
         del settings.EVENT_GETTER_CLASS
         self.assertIs(get_eventgetter(), EventGetter)
 
-    @override_settings(EVENT_GETTER_CLASS='nablapps.events.event_overrides.EventGetter')
     def test_with_event_override_setting(self):
         self.assertIs(get_eventgetter(), EventGetter)
 
-    @override_settings(EVENT_GETTER_CLASS='nablapps.events.tests.event_override_test_dummy_module.TestGetter')
+    @override_settings(EVENT_GETTER_CLASS='events.tests.event_override_test_dummy_module.TestGetter')
     def test_with_event_override_setting_dummy(self):
         self.assertIs(get_eventgetter(), TestGetter)
 
@@ -44,6 +43,6 @@ class GetEventGetterTest(TestCase):
     def test_unknown_module(self):
         self.assertRaises(ImportError, get_eventgetter)
 
-    @override_settings(EVENT_GETTER_CLASS='nablapps.events.tests.event_override_test_dummy_module.NonExistantClass')
+    @override_settings(EVENT_GETTER_CLASS='events.tests.event_override_test_dummy_module.NonExistantClass')
     def test_unknown_class(self):
         self.assertRaises(AttributeError, get_eventgetter)

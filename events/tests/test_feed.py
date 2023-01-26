@@ -4,7 +4,6 @@ from django.urls import reverse
 from events.models import Event
 
 
-@override_settings(ROOT_URLCONF="nablapps.events.urls")
 class RecentEventsTestCase(TestCase):
 
     def test_feed(self):
