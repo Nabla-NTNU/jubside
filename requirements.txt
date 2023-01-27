@@ -1,10 +1,10 @@
 django==2.2.28
 django-markdown-app==0.9.7
-easy-thumbnails==2.7.2
+easy-thumbnails==2.8.5
 django-bootstrap3==12.1.0
-django-image-cropping==1.2.0
-django-sekizai==1.1.0
-django-braces==1.14.0
+django-image-cropping==1.7
+django-sekizai==2.0.0
+django-braces==1.15.0
 gunicorn==20.1.0
 PyMySQL==1.0.2
 django-qr-code==1.1.0
