@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import Group
 
-from six.moves.urllib.parse import urlparse
+from urllib.parse import urlparse
 from ..exceptions import RegistrationNotRequiredException, RegistrationNotAllowed, RegistrationNotOpen
 
 
