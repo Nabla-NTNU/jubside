@@ -22,12 +22,10 @@ from django.views.generic import RedirectView, TemplateView
 from . import views
 
 urlpatterns = [
-    # Add prefix to all urls
     url(r'^$', views.FrontPageView.as_view(), name='frontpage'),
     url(r'^', include('user.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^album/', include('contentapps.album.urls')),
-	url(r'^alumni/$', TemplateView.as_view(template_name='alumni.html')),
     url(r'^arrangement/', include('events.urls')),
     url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico', permanent=True)),
     url(r'^markdown/', include('django_markdown.urls')),
