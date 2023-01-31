@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load flatpages %}
+
+{% block content %}
+<div class="alumnipage">
+    <h2>{{ flatpage.title }}</h2>
+    {{ flatpage.content }}
+</div>
+{% endblock %}

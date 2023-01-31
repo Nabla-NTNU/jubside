@@ -361,6 +361,23 @@ main {
     object-fit: cover;
 }
 
+
+.alumnipage {
+    background: #7E304E;
+    margin-top: 20px;
+    padding: 12px;
+}
+
+.alumnipage p {
+    font-family: RobotoBold;
+    font-size: 1.2em;
+}
+
+.alumnipage h1, h2, h3, h4, h5, h6 {
+    font-family: LemonMilk;
+}
+
+
 /*@media only screen and (max-width: 768px) {
 	.jub-content article {
 		width: 100%;
