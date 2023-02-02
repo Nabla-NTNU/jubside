@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% load django_markdown %}
+{% load markdown %}
 {% load easy_thumbnails %}
 {% load humanize %}
 
@@ -24,7 +24,7 @@
     <h2>{{ event.event_start|date:"d. M" }} kl. {{ event.event_start|date:"H:i" }} | {{ event.location }} </h2>
     <div class="event-paragraph" {% if not event.registration_required %} style="width: 100%" {% endif %}>
         <p>{{ event.lead_paragraph}}</p>
-        <p>{{ event.body|markdown}}</p>
+        <p>{{ event.body | unsafe_markdown_to_html}}</p>
     </div>
 
     {% if event.registration_required %}

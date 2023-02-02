@@ -28,7 +28,6 @@ urlpatterns = [
     url(r'^album/', include('contentapps.album.urls')),
     url(r'^arrangement/', include('events.urls')),
     url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico', permanent=True)),
-    url(r'^markdown/', include('django_markdown.urls')),
 
     # Del filer (Husk manage.py collectstatic for static filer når DEBUG=False)
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),

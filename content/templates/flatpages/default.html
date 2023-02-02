@@ -8,5 +8,5 @@
 
 {% block content %}
     <h1>{{ flatpage.title }}</h1>
-    {{ flatpage.content|markdown:"unsafe"}}
+    {{ flatpage.content | unsafe_markdown_to_html }}
 {% endblock %}

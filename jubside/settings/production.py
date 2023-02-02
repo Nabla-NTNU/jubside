@@ -81,8 +81,6 @@ INSTALLED_APPS = [
     'bootstrap3',
     'easy_thumbnails',
     'image_cropping',
-    'django_markdown',
-    'markdown',
     'sekizai',
     'qr_code'
 ]
