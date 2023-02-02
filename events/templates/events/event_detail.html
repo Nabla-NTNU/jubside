@@ -17,7 +17,7 @@
 {% if not event.hidden_to_guests or user.is_authenticated %}
 <div class="event-header">
     <img alt="header"
-         src="{% thumbnail event.front_picture 1000x400 box=event.event_cropping upscale=True detail=True quality=95 %}">
+         src="{% thumbnail event.event_picture 1000x400 box=event.event_cropping upscale=True detail=True quality=95 %}">
       <h1> {{ event.headline }} </h1>
 </div>
 <div class="event-info">
