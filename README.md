@@ -8,7 +8,7 @@ Backenddelen av nettsiden er skrevet i [django](http://djangoproject.org).
 
 ## Systemavhengigheter (garantert ikke oppdatert etter kort tid)
 
-* python 3.4 (eller nyere)
+* python 3.9 (eller nyere)
 
 ## Mappestruktur ##
 - jubside -- settings og base-html for hele siden, deler av forside (avhengig av arrangement fra events)

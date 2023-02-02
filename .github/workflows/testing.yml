@@ -8,8 +8,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, macos-latest]
-        python_version: ["3.6.15"]
+        os: [ubuntu-22.04, macos-12]
+        python_version: ["3.9.16"]
     defaults:
       run:
         shell: bash  # For `source` on all os-es
