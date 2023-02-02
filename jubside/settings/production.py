@@ -132,6 +132,7 @@ DATABASES = {
         'NAME': get_env('MYSQL_DATABASE'),
         'USER': get_env('MYSQL_USER'),
         'PASSWORD': get_env('MYSQL_USER_PASSWORD'),
+        'OPTIONS': {'charset': 'utf8mb4'},
     }
 }
 
