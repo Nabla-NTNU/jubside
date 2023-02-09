@@ -1,7 +1,7 @@
 django==2.2.28
 markdown==3.4.1
 easy-thumbnails==2.8.5
-django-bootstrap3==12.1.0
+django-bootstrap3==21.2
 django-image-cropping==1.7
 django-sekizai==3.0.1
 django-braces==1.15.0
