@@ -1,12 +1,12 @@
 django==3.2.17
 markdown==3.4.1
 easy-thumbnails==2.8.5
-django-bootstrap3==21.2
+django-bootstrap3==22.2
 django-image-cropping==1.7
-django-sekizai==3.0.1
+django-sekizai==4.0.0
 django-braces==1.15.0
 gunicorn==20.1.0
 PyMySQL==1.0.2
-django-qr-code==3.0.0
+django-qr-code==3.1.1
 qrcode==7.4.2
 django-naomi==0.8  # NOTE: Last release is from 2015
