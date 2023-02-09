@@ -56,6 +56,8 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(VARIABLE_CONTENT, 'static-collected')
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 
 # Application definition
 INSTALLED_APPS = [
